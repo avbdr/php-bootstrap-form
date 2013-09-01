@@ -1,22 +1,20 @@
 <?php
-namespace PFBC\Element;
-
-class jQueryUIDate extends Textbox {
+class Element_jQueryUIDate extends Element_Textbox {
 	protected $_attributes = array(
 		"type" => "text",
 		"autocomplete" => "off"
 	);
-    protected $jQueryOptions;
+	protected $jQueryOptions;
 
 	public function getCSSFiles() {
 		return array(
-			$this->_form->getResourcesPath() . "/jquery-ui/css/smoothness/jquery-ui.min.css"
+			$this->_form->getPrefix() . "://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css"
 		);
 	}
 
 	public function getJSFiles() {
 		return array(
-			$this->_form->getResourcesPath() . "/jquery-ui/js/jquery-ui.min.js"
+			$this->_form->getPrefix() . "://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"
 		);
 	}
 
@@ -26,7 +24,7 @@ class jQueryUIDate extends Textbox {
     }
 
     public function render() {
-        $this->validation[] = new \PFBC\Validation\Date;
+        $this->validation[] = new Validation_Date;
         parent::render();
     }
 }

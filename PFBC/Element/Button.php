@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\Element;
-
-class Button extends \PFBC\Element {
+class Element_Button extends Element {
 	protected $_attributes = array("type" => "submit", "value" => "Submit");
 	protected $icon;
 
@@ -15,7 +13,7 @@ class Button extends \PFBC\Element {
 		$class = "btn";
 		if(empty($type) || $type == "submit")
 			$class .= " btn-primary";
-			
+
 		if(!empty($properties["class"]))
 			$properties["class"] .= " " . $class;
 		else

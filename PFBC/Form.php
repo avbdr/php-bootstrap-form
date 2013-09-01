@@ -1,13 +1,11 @@
 <?php
-namespace PFBC;
-
 /*This project's namespace structure is leveraged to autoload requested classes at runtime.*/
-function Load($class) {
-	$file = __DIR__ . "/../" . str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
+function PFBC_Load($class) {
+	$file = dirname(__FILE__) . "/" . str_replace("_", DIRECTORY_SEPARATOR, $class) . ".php";
 	if(is_file($file))
 		include_once $file;
 }
-spl_autoload_register("PFBC\Load");
+spl_autoload_register("PFBC_Load");
 if(in_array("__autoload", spl_autoload_functions()))
 	spl_autoload_register("__autoload");
 
@@ -23,7 +21,7 @@ class Form extends Base {
 	protected $labelToPlaceholder;
 	protected $resourcesPath;
 	/*Prevents various automated from being automatically applied.  Current options for this array
-	included jquery, jqueryui, bootstrap and focus.*/
+	included jQuery, bootstrap and focus.*/
 	protected $prevent = array();
 	protected $view;
 
@@ -40,17 +38,17 @@ class Form extends Base {
 		/*The Standard view class is applied by default and will be used unless a different view is
 		specified in the form's configure method*/
 		if(empty($this->view))
-			$this->view = new View\SideBySide;
+			$this->view = new View_SideBySide;
 
 		if(empty($this->errorView))
-			$this->errorView = new ErrorView\Standard;
+			$this->errorView = new ErrorView_Standard;
 		
 		/*The resourcesPath property is used to identify where third-party resources needed by the
 		project are located.  This property will automatically be set properly if the PFBC directory
 		is uploaded within the server's document root.  If symbolic links are used to reference the PFBC
 		directory, you may need to set this property in the form's configure method or directly in this
 		constructor.*/
-		$path = __DIR__ . "/Resources";
+		$path = dirname(__FILE__) . "/Resources";
 		if(strpos($path, $_SERVER["DOCUMENT_ROOT"]) !== false)
 			$this->resourcesPath = substr($path, strlen($_SERVER["DOCUMENT_ROOT"]));
 		else
@@ -67,14 +65,14 @@ class Form extends Base {
 		$element->_setForm($this);
 
 		//If the element doesn't have a specified id, a generic identifier is applied.
-        $id = $element->getAttribute("id");
+		$id = $element->getAttribute("id");
         if(empty($id))
             $element->setAttribute("id", $this->_attributes["id"] . "-element-" . sizeof($this->_elements));
         $this->_elements[] = $element;
 
 		/*For ease-of-use, the form tag's encytype attribute is automatically set if the File element
 		class is added.*/
-		if($element instanceof Element\File)
+		if($element instanceof Element_File)
 			$this->_attributes["enctype"] = "multipart/form-data";
     }
 
@@ -82,11 +80,11 @@ class Form extends Base {
 	or after validation errors, are applied to elements within this method.*/
     protected function applyValues() {
         foreach($this->_elements as $element) {
-            $name = $element->getAttribute("name");
+			$name = $element->getAttribute("name");
             if(isset($this->_values[$name]))
-                $element->setAttribute("value", $this->_values[$name]);
+				$element->setAttribute("value", $this->_values[$name]);
             elseif(substr($name, -2) == "[]" && isset($this->_values[substr($name, 0, -2)]))
-                $element->setAttribute("value", $this->_values[substr($name, 0, -2)]);
+				$element->setAttribute("value", $this->_values[substr($name, 0, -2)]);
         }
     }
 
@@ -115,6 +113,10 @@ class Form extends Base {
 	public function getPrefix() {
 		return $this->_prefix;
 	}
+
+	public function getPrevent() {
+        return $this->prevent;
+    }
 
     public function getResourcesPath() {
         return $this->resourcesPath;
@@ -165,7 +167,7 @@ class Form extends Base {
 
 					/*The File element must be handled differently b/c it uses the $_FILES superglobal and
 					not $_GET or $_POST.*/
-					if($element instanceof Element\File)
+					if($element instanceof Element_File)
 						$data[$name] = $_FILES[$name]["name"];
 
 					if(isset($data[$name])) {
@@ -177,9 +179,7 @@ class Form extends Base {
 						}
 						else
 							$value = stripslashes($value);
-						
-						if($element->prefillAfterValidation())
-							self::_setSessionValue($id, $name, $value);
+						self::_setSessionValue($id, $name, $value);
 					}		
 					else
 						$value = null;
@@ -204,19 +204,6 @@ class Form extends Base {
 			$valid = false;
 
 		return $valid;
-	}
-
-	protected function isAllowedUrl($url) {
-		if(!empty($this->prevent)) {
-			if(in_array("bootstrap", $this->prevent) && strpos($url, "/bootstrap/") !== false)
-				return false;
-			elseif(in_array("jquery", $this->prevent) && strpos($url, "/jquery.min.js") !== false)
-				return false;
-			elseif(in_array("jqueryui", $this->prevent) && strpos($url, "/jquery-ui/") !== false)
-				return false;
-		}
-
-		return true;
 	}
 
 	/*This method restores the serialized form instance.*/
@@ -250,9 +237,6 @@ class Form extends Base {
 
 		if($returnHTML)
 			ob_start();
-
-		//For usability, the prevent array is treated case insensitively.
-		$this->prevent = array_map("strtolower", $this->prevent);	
 
 		$this->renderCSS();
 		$this->view->render();
@@ -288,10 +272,9 @@ class Form extends Base {
 	}
 
 	protected function renderCSSFiles() {
-		$urls = array(
-			$this->resourcesPath . "/bootstrap/css/bootstrap.min.css",
-			$this->resourcesPath . "/bootstrap/css/bootstrap-responsive.min.css"
-		);	
+		$urls = array();
+		if(!in_array("bootstrap", $this->prevent))
+			$urls[] = $this->_prefix . "://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css";
 
 		foreach($this->_elements as $element) {
 			$elementUrls = $element->getCSSFiles();
@@ -302,10 +285,8 @@ class Form extends Base {
 		/*This section prevents duplicate css files from being loaded.*/ 
 		if(!empty($urls)) {	
 			$urls = array_values(array_unique($urls));
-			foreach($urls as $url) {
-				if($this->isAllowedUrl($url))
-					echo '<link type="text/css" rel="stylesheet" href="', $url, '"/>';
-			}	
+			foreach($urls as $url)
+				echo '<link type="text/css" rel="stylesheet" href="', $url, '"/>';
 		}	
 	}
 
@@ -383,10 +364,11 @@ JS;
 	}
 
 	protected function renderJSFiles() {
-		$urls = array(
-			$this->resourcesPath . "/jquery.min.js",
-			$this->resourcesPath . "/bootstrap/js/bootstrap.min.js"
-		);	
+		$urls = array();
+		if(!in_array("jQuery", $this->prevent))
+			$urls[] = $this->_prefix . "://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
+		if(!in_array("bootstrap", $this->prevent))
+			$urls[] = $this->_prefix . "://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js";
 
 		foreach($this->_elements as $element) {
 			$elementUrls = $element->getJSFiles();
@@ -397,10 +379,8 @@ JS;
 		/*This section prevents duplicate js files from being loaded.*/ 
 		if(!empty($urls)) {	
 			$urls = array_values(array_unique($urls));
-			foreach($urls as $url) {
-				if($this->isAllowedUrl($url))
-					echo '<script type="text/javascript" src="', $url, '"></script>';
-			}	
+			foreach($urls as $url)
+				echo '<script type="text/javascript" src="', $url, '"></script>';
 		}	
 	}
 
@@ -421,7 +401,7 @@ JS;
 			$_SESSION["pfbc"][$id]["errors"][$element][] = $error;
 	}
 
-	protected static function _setSessionValue($id, $element, $value) {
+	public static function _setSessionValue($id, $element, $value) {
 		$_SESSION["pfbc"][$id]["values"][$element] = $value;
 	}
 

@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\Validation;
-
-class RegExp extends \PFBC\Validation {
+class Validation_RegExp extends Validation {
 	protected $message = "Error: %element% contains invalid characters.";
 	protected $pattern;
 

@@ -1,6 +1,4 @@
 <?php
-namespace PFBC;
-
 abstract class ErrorView extends Base {
 	protected $_form;
 

@@ -1,6 +1,4 @@
 <?php
-namespace PFBC;
-
 abstract class Element extends Base {
 	protected $_errors = array();
 	protected $_attributes = array();
@@ -10,7 +8,6 @@ abstract class Element extends Base {
 	protected $shortDesc;
 	protected $longDesc;
 	protected $validation = array();
-	protected $prefillAfterValidation = 1;
 
 	public function __construct($label, $name, array $properties = null) {
 		$configuration = array(
@@ -29,7 +26,7 @@ abstract class Element extends Base {
 	/*When an element is serialized and stored in the session, this method prevents any non-essential
 	information from being included.*/
 	public function __sleep() {
-		return array("_attributes", "label", "validation", "prefillAfterValidation");
+		return array("_attributes", "label", "validation");
 	}
 
 	/*If an element requires external stylesheets, this method is used to return an
@@ -52,15 +49,11 @@ abstract class Element extends Base {
 		return $this->longDesc;
 	}
 
-	public function prefillAfterValidation() {
-		return $this->prefillAfterValidation;
-	}
-
 	/*This method provides a shortcut for checking if an element is required.*/
 	public function isRequired() {
 		if(!empty($this->validation)) {
 			foreach($this->validation as $validation) {
-				if($validation instanceof Validation\Required)
+				if($validation instanceof Validation_Required)
 					return true;
 			}
 		}
@@ -148,16 +141,9 @@ abstract class Element extends Base {
 	/*This method provides a shortcut for applying the Required validation class to an element.*/
 	public function setRequired($required) {
 		if(!empty($required))
-			$this->validation[] = new Validation\Required;
+			$this->validation[] = new Validation_Required;
 		$this->_attributes["required"] = "";	
 	}
-
-	/*This method provides a shortcut for applying the MaxLength validation class to an element.*/
-	public function setMaxLength($limit) {
-        if(!empty($limit))
-            $this->validation[] = new Validation\MaxLength($limit);
-        $this->_attributes["maxlength"] = $limit;
-    }
 
 	/*This method applies one or more validation rules to an element.  If can accept a single concrete 
 	validation class or an array of entries.*/
@@ -169,7 +155,7 @@ abstract class Element extends Base {
 			/*Ensures $object contains a existing concrete validation class.*/
 			if($object instanceof Validation) {
 				$this->validation[] = $object;
-				if($object instanceof Validation\Required)
+				if($object instanceof Validation_Required)
 					$this->_attributes["required"] = "";	
 			}	
 		}	

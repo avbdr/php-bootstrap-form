@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\Validation;
-
-class Email extends \PFBC\Validation {
+class Validation_Email extends Validation {
 	protected $message = "Error: %element% must contain an email address.";
 
 	public function isValid($value) {

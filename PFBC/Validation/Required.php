@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\Validation;
-
-class Required extends \PFBC\Validation {
+class Validation_Required extends Validation {
 	protected $message = "Error: %element% is a required field.";
 
 	public function isValid($value) {

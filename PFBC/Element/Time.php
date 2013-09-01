@@ -1,6 +1,4 @@
 <?php
-namespace PFBC\Element;
-
-class Time extends Textbox {
+class Element_Time extends Element_Textbox {
 	protected $_attributes = array("type" => "time");
 }

@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\View;
-
-class Vertical extends \PFBC\View {
+class View_Vertical extends View {
 	public function render() {
 		echo '<form', $this->_form->getAttributes(), '>';
 		$this->_form->getErrorView()->render();
@@ -12,13 +10,13 @@ class Vertical extends \PFBC\View {
         for($e = 0; $e < $elementSize; ++$e) {
             $element = $elements[$e];
 
-            if($element instanceof \PFBC\Element\Button) {
-                if($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
+            if($element instanceof Element_Button) {
+                if($e == 0 || !$elements[($e - 1)] instanceof Element_Button)
                     echo '<div class="form-actions">';
 				else
 					echo ' ';
                 $element->render();
-                if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof \PFBC\Element\Button)
+                if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof Element_Button)
                     echo '</div>';
             }
             else {
@@ -32,7 +30,7 @@ class Vertical extends \PFBC\View {
 		echo '</form>';
     }
 
-	protected function renderLabel(\PFBC\Element $element) {
+	protected function renderLabel(Element $element) {
         $label = $element->getLabel();
 		echo '<label for="', $element->getAttribute("id"), '">';
         if(!empty($label)) {

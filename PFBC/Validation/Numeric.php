@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\Validation;
-
-class Numeric extends \PFBC\Validation {
+class Validation_Numeric extends Validation {
 	protected $message = "Error: %element% must be numeric.";
 
 	public function isValid($value) {

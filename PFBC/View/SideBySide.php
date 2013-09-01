@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\View;
-
-class SideBySide extends \PFBC\View {
+class View_SideBySide extends View {
 	protected $class = "form-horizontal";
 
 	public function render() {
@@ -16,17 +14,17 @@ class SideBySide extends \PFBC\View {
 		for($e = 0; $e < $elementSize; ++$e) {
 			$element = $elements[$e];
 
-			if($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTML)
+			if($element instanceof Element_Hidden || $element instanceof Element_HTML)
 				$element->render();
-            elseif($element instanceof \PFBC\Element\Button) {
-                if($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
+            elseif($element instanceof Element_Button) {
+                if($e == 0 || !$elements[($e - 1)] instanceof Element_Button)
 					echo '<div class="form-actions">';
 				else
 					echo ' ';
 				
 				$element->render();
 
-                if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof \PFBC\Element\Button)
+                if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof Element_Button)
                     echo '</div>';
             }
             else {
@@ -38,7 +36,7 @@ class SideBySide extends \PFBC\View {
 		echo '</fieldset></form>';
     }
 
-	protected function renderLabel(\PFBC\Element $element) {
+	protected function renderLabel(Element $element) {
         $label = $element->getLabel();
         if(!empty($label)) {
 			echo '<label class="control-label" for="', $element->getAttribute("id"), '">';

@@ -1,6 +1,4 @@
 <?php
-namespace PFBC;
-
 abstract class View extends Base {
 	protected $_form;
 

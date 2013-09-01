@@ -1,11 +1,9 @@
 <?php
-namespace PFBC\Element;
-
-class Email extends Textbox {
+class Element_Email extends Element_Textbox {
 	protected $_attributes = array("type" => "email");
 
 	public function render() {
-		$this->validation[] = new \PFBC\Validation\Email;
+		$this->validation[] = new Validation_Email;
 		parent::render();
 	}
 }

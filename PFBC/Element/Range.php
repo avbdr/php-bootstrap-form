@@ -1,6 +1,4 @@
 <?php
-namespace PFBC\Element;
-
-class Range extends Textbox {
+class Element_Range extends Element_Textbox {
 	protected $_attributes = array("type" => "range");
 }

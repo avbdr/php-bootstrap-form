@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\Element;
-
-class Radio extends \PFBC\OptionElement {
+class Element_Radio extends OptionElement {
 	protected $_attributes = array("type" => "radio");
 	protected $inline;
 

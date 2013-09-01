@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\Element;
-
-class Date extends Textbox {
+class Element_Date extends Element_Textbox {
 	protected $_attributes = array(
 		"type" => "date",
 		"pattern" => "\d{4}-\d{2}-\d{2}"
@@ -15,7 +13,7 @@ class Date extends Textbox {
     }
 
 	public function render() {
-		$this->validation[] = new \PFBC\Validation\RegExp("/" . $this->_attributes["pattern"] . "/", "Error: The %element% field must match the following date format: " . $this->_attributes["title"]);
+		$this->validation[] = new Validation_RegExp("/" . $this->_attributes["pattern"] . "/", "Error: The %element% field must match the following date format: " . $this->_attributes["title"]);
 		parent::render();
 	}
 }

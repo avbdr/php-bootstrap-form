@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\View;
-
-class Inline extends \PFBC\View {
+class View_Inline extends View {
 	protected $class = "form-inline";
 
 	public function render() {
@@ -24,7 +22,7 @@ class Inline extends \PFBC\View {
 		echo '</form>';
     }
 
-	protected function renderLabel(\PFBC\Element $element) {
+	protected function renderLabel(Element $element) {
         $label = $element->getLabel();
         if(!empty($label)) {
 			echo '<label for="', $element->getAttribute("id"), '">';

@@ -1,7 +1,5 @@
 <?php
-namespace PFBC\Validation;
-
-class AlphaNumeric extends RegExp {
+class Validation_AlphaNumeric extends Validation_RegExp {
 	protected $message = "Error: %element% must be alphanumeric (contain only numbers, letters, underscores, and/or hyphens).";
 
 	public function __construct($message = "") {
