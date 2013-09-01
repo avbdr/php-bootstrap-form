@@ -18,7 +18,9 @@ class Element_Select extends OptionElement {
 		foreach($this->options as $value => $text) {
 			$value = $this->getOptionValue($value);
 			echo '<option value="', $this->filter($value), '"';
-			if(!$selected && in_array($value, $this->_attributes["value"])) {
+			if(in_array($value, $this->_attributes["value"])) {
+				if ($selected && empty ($this->_attributes["multiple"]))
+					continue;
 				echo ' selected="selected"';
 				$selected = true;
 			}	
