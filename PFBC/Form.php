@@ -186,10 +186,19 @@ class Form extends Base {
 					
 					/*If a validation error is found, the error message is saved in the session along with
 					the element's name.*/
-					if(!$element->isValid($value)) {
-						self::setError($id, $element->getErrors(), $name);
-						$valid = false;
-					}	
+					if (is_array($value)) {
+						foreach ($value as $v) {
+							if (!$element->isValid($v)) {
+								self::setError($id, $element->getErrors(), $name);
+								$valid = false;
+							}
+						}
+					} else {
+						if(!$element->isValid($value)) {
+							self::setError($id, $element->getErrors(), $name);
+							$valid = false;
+						}
+					}
 				}
 			}
 
