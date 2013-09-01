@@ -419,4 +419,21 @@ JS;
 	public function setValues(array $values) {
         $this->_values = array_merge($this->_values, $values);
     }
+
+    public function addElements ($items) {
+        foreach ($items as $id => $props) {
+            $type = $props[0];
+            if (!preg_match("/^none/i",$id)) {
+                if ($props[0]=='Select' || $props[0]=='Radio' || $props[0]=='Checkbox') {
+                    $props[4]['name'] = $id;
+                    $props[4]['id'] = $id;
+                } else {
+                    $props[3]['name'] = $id;
+                    $props[3]['id'] = $id;
+                }
+            }
+            eval ("\$element = new Element_$type (\$props[1], \$props[2], \$props[3], \$props[4]);");
+            $this->AddElement($element);
+        }
+    }
 }
