@@ -79,13 +79,24 @@ abstract class Element extends Base {
 			if(substr($element, -1) == ":")
 				$element = substr($element, 0, -1);
 
+			if (strlen($value > 0)) {
+				if (!empty($this->_attributes['minlength']) && strlen($value) < $this->_attributes['minlength']) {
+					$this->_errors[] = $element. " should be at least {$this->_attributes['minlength']} characters";
+					$valid = false;
+				}
+				if (!empty($this->_attributes['maxlength']) && strlen($value) > $this->_attributes['maxlength']) {
+					$this->_errors[] = $element. " should be not more then {$this->_attributes['maxlength']} characters";
+					$valid = false;
+				}
+            }
+
 			foreach($this->validation as $validation) {
 				if(!$validation->isValid($value)) {
 					/*In the error message, %element% will be replaced by the element's label (or 
 					name if label is not provided).*/
 					$this->_errors[] = str_replace("%element%", $element, $validation->getMessage());
 					$valid = false;
-				}	
+				}
 			}
 		}
 		return $valid;
