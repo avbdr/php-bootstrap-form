@@ -31,19 +31,20 @@ class View_SideBySide extends View {
                     echo '</div>';
             }
             else {
-				$element->appendAttribute("class", "form-control");
+                $element->appendAttribute("class", "form-control");
 				if (!$prevElement->getAttribute("shared"))
 					echo '<div class="form-group">', $this->renderLabel($element), '<div class="col-md-6">';
 				echo $element->render(), $this->renderDescriptions($element);
 				if (!$element->getAttribute("shared"))
 					echo '</div></div>';
-				else
+   				else
 					echo '&nbsp;&nbsp;&nbsp;';
 				++$elementCount;
 			}
 		}
+
 		echo '</fieldset></form>';
-	}
+    }
 
 	protected function renderLabel(Element $element) {
         $label = $element->getLabel();
