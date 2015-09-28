@@ -186,19 +186,19 @@ class Form extends Base {
 					
 					/*If a validation error is found, the error message is saved in the session along with
 					the element's name.*/
-					if (is_array($value)) {
-						foreach ($value as $v) {
-							if (!$element->isValid($v)) {
-								self::setError($id, $element->getErrors(), $name);
-								$valid = false;
-							}
-						}
-					} else {
-						if(!$element->isValid($value)) {
-							self::setError($id, $element->getErrors(), $name);
-							$valid = false;
-						}
-					}
+                    if (is_array($value)) {
+                        foreach ($value as $v) {
+                            if (!$element->isValid($v)) {
+                                self::setError($id, $element->getErrors(), $name);
+                                $valid = false;
+                            }
+                        }
+                    } else {
+    					if(!$element->isValid($value)) {
+	    					self::setError($id, $element->getErrors(), $name);
+		    				$valid = false;
+			    		}
+                    }
 				}
 			}
 
@@ -432,8 +432,38 @@ JS;
                     $props[3]['id'] = $id;
                 }
             }
-            eval ("\$element = new Element_$type (\$props[1], \$props[2], \$props[3], \$props[4]);");
+            $elementClassName = "Element_$type";
+            for ($i = 1; $i<=4;$i++)
+                if (!isset ($props[$i])) $props[$i] = null;
+            $element = new $elementClassName ($props[1], $props[2], $props[3], $props[4]);
             $this->AddElement($element);
         }
+    }
+
+    public static function renderArray ($formId, $items, $values) {
+        $form = new Form($formId);
+        $opts = Array (
+            "prevent" => array("bootstrap", "jQuery"),
+            "action" => $_SERVER['SCRIPT_URL']
+        );
+
+        if (empty ($items['ajax'])) {
+            $items["ajax"] = Array ("Hidden","","",Array("value" => "false"));
+        } else {
+            $opts['ajax'] = true;
+            $opts['ajaxCallback'] = $items['ajax'];
+            unset ($items['ajax']);
+        }
+        $items["noneSubmitButton"] = Array ("Button","Submit");
+        if (!empty ($values['id']))
+            $items['noneRemoveButton'] = Array ("Button", "Remove", "button", array("class" => "btn-danger", "data-toggle" => "modal", "data-target" => "#rmConfirm"));
+        if (!empty ($items['ajax']))
+            $items["noneCancelButton"] = Array ("Button", "Cancel", "button", array("onclick" => "history.go(-1);"));
+
+        $form->configure ($opts);
+        $form->addElements ($items);
+        if (!empty ($values))
+            $form->setValues ($values);
+        $form->render();
     }
 }
