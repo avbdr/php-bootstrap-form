@@ -1,5 +1,5 @@
 <?php
-class View_Inline extends View {
+class View_Inline extends FormView {
 	protected $class = "form-inline";
 
 	public function render() {

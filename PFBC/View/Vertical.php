@@ -1,5 +1,5 @@
 <?php
-class View_Vertical extends View {
+class View_Vertical extends FormView {
 	public function render() {
 		echo '<form', $this->_form->getAttributes(), '>';
 		$this->_form->getErrorView()->render();

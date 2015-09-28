@@ -1,5 +1,5 @@
 <?php
-abstract class View extends Base {
+abstract class FormView extends Base {
 	protected $_form;
 
 	public function __construct(array $properties = null) {

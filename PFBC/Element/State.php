@@ -3,6 +3,7 @@ class Element_State extends Element_Select {
 	public function __construct($label, $name, array $properties = null) {
 		$options = array(
 			"" => "--Select State--",
+			"nostate" => "No State",
 			"AL" => "Alabama",
 			"AK" => "Alaska",
 			"AZ" => "Arizona",

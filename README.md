@@ -1,1 +1,1 @@
-See documentation on http://code.google.com/p/php-form-builder-class/
+See documentation on http://www.imavex.com/pfbc3.x-php5/
