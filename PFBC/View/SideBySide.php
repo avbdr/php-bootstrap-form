@@ -1,9 +1,10 @@
 <?php
-class View_SideBySide extends View {
+class View_SideBySide extends FormView {
 	protected $class = "form-horizontal";
 
 	public function render() {
 		$this->_form->appendAttribute("class", $this->class);
+		$sharedCnt = 0;
 
 		echo '<form role="form"', $this->_form->getAttributes(), '><fieldset>';
 		$this->_form->getErrorView()->render();
@@ -13,9 +14,13 @@ class View_SideBySide extends View {
 		$elementCount = 0;
 		for($e = 0; $e < $elementSize; ++$e) {
 			$element = $elements[$e];
-			$prevElement = $elements[$e-1];
-			if (!$prevElement)
-				$prevElement = new Element_HTML("");
+            if (isset ($elements[$e+1]))
+    			$nextElement = $elements[$e+1];
+            else
+                $nextElement == null;
+
+			if (!$nextElement)
+				$nextElement = new Element_HTML("");
 
 			if($element instanceof Element_Hidden || $element instanceof Element_HTML)
 				$element->render();
@@ -31,18 +36,27 @@ class View_SideBySide extends View {
                     echo '</div>';
             }
             else {
-                $element->appendAttribute("class", "form-control");
-				if (!$prevElement->getAttribute("shared"))
-					echo '<div class="form-group">', $this->renderLabel($element), '<div class="col-md-6">';
+                if (!$element instanceof Element_Radio && !$element instanceof Element_File)
+                    $element->appendAttribute("class", "form-control");
+				if ($sharedCnt == 0)
+        			echo '<div class="form-group elem-'.$element->getAttribute("id").'">', $this->renderLabel($element);
+
+				if ($element->getAttribute("shared"))
+					echo "<div class='".$element->getAttribute("shared")."'>";
+				else
+					echo '<div class="col-md-6">';
 				echo $element->render(), $this->renderDescriptions($element);
-				if (!$element->getAttribute("shared"))
-					echo '</div></div>';
-   				else
-					echo '&nbsp;&nbsp;&nbsp;';
+				echo '</div>';
+				if ($element->getAttribute("shared") && $nextElement->getAttribute("shared")) {
+					$sharedCnt++;
+				} else {
+					echo "</div>";
+					$sharedCnt = 0;
+				}
+
 				++$elementCount;
 			}
 		}
-
 		echo '</fieldset></form>';
     }
 
