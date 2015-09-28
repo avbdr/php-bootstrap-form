@@ -2,7 +2,9 @@
 abstract class OptionElement extends Element {
 	protected $options;
 
-	public function __construct($label, $name, array $options, array $properties = null) {
+	public function __construct($label, $name, $options, array $properties = null) {
+        if (!is_array ($options))
+            $options = Array();
 		$this->options = $options;
 		if(!empty($this->options) && array_values($this->options) === $this->options)
 			$this->options = array_combine($this->options, $this->options);
