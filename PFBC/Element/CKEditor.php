@@ -48,7 +48,7 @@ JS;
 
     function getJSFiles() {
         return array(
-            $this->_form->getResourcesPath() . "/ckeditor/ckeditor.js"
+            "//cdn.ckeditor.com/4.5.4/standard/ckeditor.js"
         );
     }
 }

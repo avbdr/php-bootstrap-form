@@ -10,7 +10,7 @@ class Element_TinyMCE extends Element_Textarea {
     }
 
     function renderJS() {
-        echo 'tinyMCE.init({ mode: "exact", elements: "', $this->_attributes["id"], '", width: "100%"';
+        echo 'tinymce.init({ mode: "exact", elements: "', $this->_attributes["id"], '", width: "100%"';
         if(!empty($this->basic))
             echo ', theme: "simple"';
         else
@@ -25,7 +25,7 @@ class Element_TinyMCE extends Element_Textarea {
 
     function getJSFiles() {
         return array(
-            $this->_form->getResourcesPath() . "/tiny_mce/tiny_mce.js"
+            "//tinymce.cachefly.net/4.2/tinymce.min.js"
         );
     }
 }
