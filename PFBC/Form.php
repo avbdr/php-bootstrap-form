@@ -284,7 +284,7 @@ class Form extends Base {
 	protected function renderCSSFiles() {
 		$urls = array();
 		if(!in_array("bootstrap", $this->prevent))
-			$urls[] = $this->_prefix . "://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css";
+			$urls[] = $this->_prefix . "://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
 
 		foreach($this->_elements as $element) {
 			$elementUrls = $element->getCSSFiles();
@@ -382,9 +382,9 @@ JS;
 	protected function renderJSFiles() {
 		$urls = array();
 		if(!in_array("jQuery", $this->prevent))
-			$urls[] = $this->_prefix . "://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
+			$urls[] = $this->_prefix . "://code.jquery.com/jquery-1.11.3.min.js";
 		if(!in_array("bootstrap", $this->prevent))
-			$urls[] = $this->_prefix . "://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js";
+			$urls[] = $this->_prefix . "://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js";
 
 		foreach($this->_elements as $element) {
 			$elementUrls = $element->getJSFiles();
