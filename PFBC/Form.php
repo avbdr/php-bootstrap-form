@@ -10,6 +10,7 @@ if(in_array("__autoload", spl_autoload_functions()))
 	spl_autoload_register("__autoload");
 
 class Form extends Base {
+	public static $SUBMIT = 99;
 	protected $_elements = array();
 	protected $_prefix = "http";
 	protected $_values = array();
@@ -337,11 +338,17 @@ JS;
 			$this->errorView->clear();
 
 			echo <<<JS
+                $('#loading').modal('show');
 				jQuery.ajax({ 
 					url: "{$this->_attributes["action"]}", 
 					type: "{$this->_attributes["method"]}", 
 					data: jQuery("#$id").serialize(), 
+                    error: function() {
+                        $('#loading').modal('hide');
+						jQuery("#$id").find("input[type=submit]").removeAttr("disabled");
+                    },
 					success: function(response) { 
+                        $('#loading').modal('hide');
 						if(response != undefined && typeof response == "object" && response.errors) {
 JS;
 
@@ -440,11 +447,11 @@ JS;
         }
     }
 
-    public static function renderArray ($formId, $items, $values) {
+    public static function renderArray ($formId, $items, $values, $buttons = 1) {
         $form = new Form($formId);
         $opts = Array (
             "prevent" => array("bootstrap", "jQuery"),
-            "action" => $_SERVER['SCRIPT_URL']
+            "action" => $_SERVER['REQUEST_URI']
         );
 
         if (empty ($items['ajax'])) {
@@ -454,12 +461,19 @@ JS;
             $opts['ajaxCallback'] = $items['ajax'];
             unset ($items['ajax']);
         }
-        $items["noneSubmitButton"] = Array ("Button","Submit");
-        if (!empty ($values['id']))
-            $items['noneRemoveButton'] = Array ("Button", "Remove", "button", array("class" => "btn-danger", "data-toggle" => "modal", "data-target" => "#rmConfirm"));
-        if (!empty ($items['ajax']))
-            $items["noneCancelButton"] = Array ("Button", "Cancel", "button", array("onclick" => "history.go(-1);"));
-
+        if ($buttons) {
+            $items["noneSubmitButton"] = Array ("Button","Submit");
+            if ($buttons != Form::$SUBMIT) {
+                if (!empty ($values['id']))
+                    if (is_array ($buttons)) {
+                        foreach ($buttons as $k => $b)
+                            $items[$k] = $b;
+                    $items['noneRemoveButton'] = Array ("Button", "Remove", "button", array("class" => "btn-danger", "data-toggle" => "modal", "data-target" => "#rmConfirm"));
+                }
+                if (!empty ($items['ajax']))
+                    $items["noneCancelButton"] = Array ("Button", "Cancel", "button", array("onclick" => "history.go(-1);"));
+            }
+        }
         $form->configure ($opts);
         $form->addElements ($items);
         if (!empty ($values))
