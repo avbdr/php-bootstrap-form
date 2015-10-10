@@ -5,7 +5,7 @@ class View_Inline extends FormView {
 	public function render() {
 		$this->_form->appendAttribute("class", $this->class);
 
-		echo '<form', $this->_form->getAttributes(), '>';
+		echo '<form', $this->_form->getAttributes(), '><!--csrftoken-->';
 		$this->_form->getErrorView()->render();
 
 		$elements = $this->_form->getElements();

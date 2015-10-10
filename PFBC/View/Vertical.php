@@ -1,7 +1,7 @@
 <?php
 class View_Vertical extends FormView {
 	public function render() {
-		echo '<form', $this->_form->getAttributes(), '>';
+		echo '<form', $this->_form->getAttributes(), '><!--csrftoken-->';
 		$this->_form->getErrorView()->render();
 
 		$elements = $this->_form->getElements();

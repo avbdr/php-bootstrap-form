@@ -6,7 +6,7 @@ class View_SideBySide extends FormView {
 		$this->_form->appendAttribute("class", $this->class);
 		$sharedCnt = 0;
 
-		echo '<form role="form"', $this->_form->getAttributes(), '><fieldset>';
+		echo '<form role="form"', $this->_form->getAttributes(), '><!--csrftoken--> <fieldset>';
 		$this->_form->getErrorView()->render();
 
 		$elements = $this->_form->getElements();
