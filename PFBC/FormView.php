@@ -13,7 +13,7 @@ abstract class FormView extends Base {
 	/*jQuery is used to apply css entries to the last element.*/
 	public function jQueryDocumentReady() {}	
 
-	public function render() {}
+	public function render($element = null) {}
 
 	public function renderCSS() {
 		echo 'label span.required { color: #B94A48; }';

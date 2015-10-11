@@ -26,9 +26,11 @@ class Form extends Base {
 	protected $prevent = array();
 	protected $view;
 
+    protected static $form = null;
+
 	public function __construct($id = "pfbc") {
 		$this->configure(array(
-			"action" => basename($_SERVER["SCRIPT_NAME"]),
+			"action" => $_SERVER['REQUEST_URI'],
 			"id" => preg_replace("/\W/", "-", $id),
 			"method" => "post"
 		));
@@ -84,7 +86,7 @@ class Form extends Base {
 			$name = $element->getAttribute("name");
             if(isset($this->_values[$name]))
 				$element->setAttribute("value", $this->_values[$name]);
-            elseif(substr($name, -2) == "[]" && isset($this->_values[substr($name, 0, -2)]))
+            elseif (substr($name, -2) == "[]" && isset($this->_values[substr($name, 0, -2)]))
 				$element->setAttribute("value", $this->_values[substr($name, 0, -2)]);
         }
     }
@@ -224,7 +226,7 @@ class Form extends Base {
 			return "";
 	}
 
-	public function render($returnHTML = false) {
+	public function render($element, $returnHTML = false) {
 		if(!empty($this->labelToPlaceholder)) {
 			foreach($this->_elements as $element) {
 				$label = $element->getLabel();
@@ -249,8 +251,8 @@ class Form extends Base {
 			ob_start();
 
 		$this->renderCSS();
-		$this->view->render();
 		$this->renderJS();
+		$this->view->render($element);
 
 		/*The form's instance is serialized and saved in a session variable for use during validation.*/
 		$this->save();
@@ -451,7 +453,6 @@ JS;
         $form = new Form($formId);
         $opts = Array (
             "prevent" => array("bootstrap", "jQuery"),
-            "action" => $_SERVER['REQUEST_URI']
         );
 
         if (empty ($items['ajax'])) {
@@ -479,5 +480,42 @@ JS;
         if (!empty ($values))
             $form->setValues ($values);
         $form->render();
+    }
+
+    public static function open ($formId, $values = null, $opts = null) {
+        self::$form = new Form ($formId);
+        $default = Array ("prevent" => array ("bootstrap", "jQuery"));
+        if ($opts && isset ($opts['ajax'])) {
+            $default['ajax'] = 1;
+            $default['ajaxCallback']= $opts['ajax'];
+        }
+        self::$form->configure ($default);
+        if (!empty ($values))
+            self::$form->setValues ($values);
+        self::$form->render ('open');
+        return $form;
+    }
+
+    public static function close ($buttons = 1) {
+        if (!$buttons)
+            return self::$form->view->renderFormClose();
+
+        self::Button ("Submit");
+        if ($buttons != Form::$SUBMIT)
+            self::Button ("Remove", "button", array("class" => "btn-danger", "data-toggle" => "modal", "data-target" => "#rmConfirm"));
+
+        self::Button ("Cancel", "button", array("onclick" => "history.go(-1);"));
+        self::$form->view->renderFormClose();
+    }
+
+    public static function __callStatic ($type, $props) {
+        $elementClassName = "Element_$type";
+        for ($i = 0; $i<=3;$i++)
+            if (!isset ($props[$i])) $props[$i] = null;
+
+        $element = new $elementClassName ($props[0], $props[1], $props[2], $props[3]);
+        self::$form->AddElement ($element);
+        self::$form->applyValues();
+        self::$form->view->renderElement ($element);
     }
 }
