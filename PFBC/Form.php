@@ -240,7 +240,7 @@ class Form extends Base {
 		$this->view->_setForm($this);
 		$this->errorView->_setForm($this);
 
-		/*When validation errors occur, the form's submitted values are saved in a session 
+		/*When validation errors occur, the form's submitted values are saved in a session
 		array, which allows them to be pre-populated when the user is redirected to the form.*/
 		$values = self::getSessionValues($this->_attributes["id"]);
 		if(!empty($values))
@@ -264,7 +264,7 @@ class Form extends Base {
 		}
 	}
 
-	/*When ajax is used to submit the form's data, validation errors need to be manually sent back to the 
+	/*When ajax is used to submit the form's data, validation errors need to be manually sent back to the
 	form using json.*/
 	public static function renderAjaxErrorResponse($id = "pfbc") {
 		$form = self::recover($id);
@@ -294,7 +294,7 @@ class Form extends Base {
 				$urls = array_merge($urls, $elementUrls);
 		}	
 
-		/*This section prevents duplicate css files from being loaded.*/ 
+		/*This section prevents duplicate css files from being loaded.*/
 		if(!empty($urls)) {	
 			$urls = array_values(array_unique($urls));
 			foreach($urls as $url)
@@ -311,14 +311,12 @@ class Form extends Base {
 			$element->renderJS();
 		
 		$id = $this->_attributes["id"];
-
-		echo 'jQuery(document).ready(function() {';
-
 		/*When the form is submitted, disable all submit buttons to prevent duplicate submissions.*/
 		echo <<<JS
-		jQuery("#$id").bind("submit", function() { 
-			jQuery(this).find("input[type=submit]").attr("disabled", "disabled"); 
-		});
+		jQuery(document).ready(function() {
+            jQuery("#$id").bind("submit", function() {
+                jQuery(this).find("input[type=submit]").attr("disabled", "disabled");
+            });
 JS;
 
 		/*jQuery is used to set the focus of the form's initial element.*/
@@ -333,7 +331,7 @@ JS;
 		serialize function is used to grab each element's name/value pair.*/
 		if(!empty($this->ajax)) {
 			echo <<<JS
-			jQuery("#$id").bind("submit", function() { 
+			jQuery("#$id").bind("submit", function() {
 JS;
 
 			/*Clear any existing validation errors.*/
@@ -341,15 +339,15 @@ JS;
 
 			echo <<<JS
                 $('#loading').modal('show');
-				jQuery.ajax({ 
-					url: "{$this->_attributes["action"]}", 
-					type: "{$this->_attributes["method"]}", 
-					data: jQuery("#$id").serialize(), 
+				jQuery.ajax({
+					url: "{$this->_attributes["action"]}",
+					type: "{$this->_attributes["method"]}",
+					data: jQuery("#$id").serialize(),
                     error: function() {
                         $('#loading').modal('hide');
 						jQuery("#$id").find("input[type=submit]").removeAttr("disabled");
                     },
-					success: function(response) { 
+					success: function(response) {
                         $('#loading').modal('hide');
 						if(response != undefined && typeof response == "object" && response.errors) {
 JS;
@@ -357,23 +355,20 @@ JS;
 			$this->errorView->applyAjaxErrorResponse();
 
 			echo <<<JS
-							jQuery("html, body").animate({ scrollTop: jQuery("#$id").offset().top }, 500 ); 
-						} 
+							jQuery("html, body").animate({ scrollTop: jQuery("#$id").offset().top }, 500 );
+						}
 						else {
 JS;
-
-
 			/*A callback function can be specified to handle any post submission events.*/
 			if(!empty($this->ajaxCallback))
 				echo $this->ajaxCallback, "(response);";
-
 			/*After the form has finished submitting, re-enable all submit buttons to allow additional submissions.*/
 			echo <<<JS
-						} 
-						jQuery("#$id").find("input[type=submit]").removeAttr("disabled"); 
+						}
+						jQuery("#$id").find("input[type=submit]").removeAttr("disabled");
 					}	
-				}); 
-				return false; 
+				});
+				return false;
 			});
 JS;
 		}
@@ -383,18 +378,13 @@ JS;
 
 	protected function renderJSFiles() {
 		$urls = array();
-		if(!in_array("jQuery", $this->prevent))
-			$urls[] = $this->_prefix . "://code.jquery.com/jquery-1.11.3.min.js";
-		if(!in_array("bootstrap", $this->prevent))
-			$urls[] = $this->_prefix . "://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js";
-
 		foreach($this->_elements as $element) {
 			$elementUrls = $element->getJSFiles();
 			if(is_array($elementUrls))
 				$urls = array_merge($urls, $elementUrls);
 		}		
 
-		/*This section prevents duplicate js files from being loaded.*/ 
+		/*This section prevents duplicate js files from being loaded.*/
 		if(!empty($urls)) {	
 			$urls = array_values(array_unique($urls));
 			foreach($urls as $url)
@@ -483,39 +473,51 @@ JS;
     }
 
     public static function open ($formId, $values = null, $opts = null) {
-        self::$form = new Form ($formId);
         $default = Array ("prevent" => array ("bootstrap", "jQuery"));
-        if ($opts && isset ($opts['ajax'])) {
-            $default['ajax'] = 1;
-            $default['ajaxCallback']= $opts['ajax'];
+        if ($opts) foreach ($opts as $key => $val) {
+            if ($key == 'ajax') {
+                $default['ajax'] = 1;
+                $default['ajaxCallback']= $opts['ajax'];
+            } else
+                $default[$key] = $val;
         }
+        self::$form = new Form ($formId);
         self::$form->configure ($default);
         if (!empty ($values))
             self::$form->setValues ($values);
-        self::$form->render ('open');
-        return $form;
+        return self::$form->render ('open');
     }
 
     public static function close ($buttons = 1) {
         if (!$buttons)
             return self::$form->view->renderFormClose();
-
+        echo '<div class="row"><div class="col-md-4"></div><div class="col-md-6">';
         self::Button ("Submit");
         if ($buttons != Form::$SUBMIT)
             self::Button ("Remove", "button", array("class" => "btn-danger", "data-toggle" => "modal", "data-target" => "#rmConfirm"));
 
         self::Button ("Cancel", "button", array("onclick" => "history.go(-1);"));
+        echo '</div></div>';
         self::$form->view->renderFormClose();
     }
 
+    public static function __call ($type, $props) {
+        return self::_call ($this, $type, $props);
+    }
+
     public static function __callStatic ($type, $props) {
+        return self::_call (self::$form, $type, $props);
+    }
+
+    private static function _call ($form, $type, $props) {
         $elementClassName = "Element_$type";
         for ($i = 0; $i<=3;$i++)
             if (!isset ($props[$i])) $props[$i] = null;
 
         $element = new $elementClassName ($props[0], $props[1], $props[2], $props[3]);
-        self::$form->AddElement ($element);
-        self::$form->applyValues();
-        self::$form->view->renderElement ($element);
+        $form->AddElement ($element);
+        $form->applyValues();
+        $form->view->renderElement ($element);
+        return $form;
     }
 }
