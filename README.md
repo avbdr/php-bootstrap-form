@@ -1,6 +1,12 @@
 ### PHP Bootstrap Form helper
 Project is fork of PFBC/PHP Form Builder Class (http://code.google.com/p/php-form-builder-class/). The main differences of the original branch and a fork are:
 
+Documentation: http://smarttechdo.com/~avb/pfbc/
+
+Demo: at http://smarttechdo.com/~avb/pfbc/example.php
+
+Demo Source:  https://github.com/avbdr/php-bootstrap-form/blob/master/example.php
+
 1. Bootstrap 3 support
 2. Added new simple API. Old API is still supported
 3. Added 'shared' element property to share 1 row between multiple elements in SideBySide View
@@ -39,8 +45,4 @@ $form->addElement(new Element_Button("Cancel", "button", array("onclick" => "his
 $form->render();
 ```
 
-Demo is available at http://smarttechdo.com/~avb/pfbc/. 
 
-Source is https://github.com/avbdr/php-bootstrap-form/blob/master/example.php
-
-See old documentation on http://www.imavex.com/pfbc3.x-php5/ . New documentation is coming.

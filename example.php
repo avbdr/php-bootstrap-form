@@ -31,6 +31,7 @@ $values['select'] = 2;
   </head>
   <body>
     <div class='container'>
+        SEE ALSO: <a href='example_ccform.php'>AJAX DEMO CREDIT CARD</a>
         <div class='row'>
             <div class='col-md-6'>
                 <?php
