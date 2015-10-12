@@ -54,7 +54,7 @@ class View_SideBySide extends FormView {
 	protected function renderLabel (Element $element) {
 		$label = $element->getLabel();
 		if(empty ($label))
-            return;
+            $label = '';
 		echo '<label class="col-md-4 control-label" for="', $element->getAttribute("id"), '">';
 		if ($element->isRequired())
 			echo '<span class="required">* </span>';

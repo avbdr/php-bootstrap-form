@@ -1,7 +1,7 @@
 <?php
 class Element_Search extends Element_Textbox {
 	protected $_attributes = array(
-		"type" => "search",
-		"class" => "search-query"
+		"class" => "search-query",
 	);
+    protected $append = '<button class="btn btn-info"><span class="glyphicon glyphicon-search"></span></button>';
 }

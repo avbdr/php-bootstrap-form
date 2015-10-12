@@ -22,18 +22,19 @@ class Element_Textbox extends Element {
 	}
 
 	protected function renderAddOn($type = "prepend") {
-		if(!empty($this->$type)) {
-			$span = true;
-			if(strpos($this->$type, "<button") !== false)
-				$span = false;
+		if (empty ($this->$type)) return;
 
-			if($span)
-				echo '<span class="input-group-addon">';
+		$span = true;
+		if(strpos ($this->$type, "<button") !== false)
+			$span = false;
 
-			echo $this->$type;
+		if($span)
+			echo '<span class="input-group-addon">';
+        else
+			echo '<span class="input-group-btn">';
 
-			if($span)
-				echo '</span>';
-		}
+		echo $this->$type;
+
+		echo '</span>';
 	}
 }
