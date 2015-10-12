@@ -20,13 +20,14 @@ class View_SideBySide extends FormView {
 		if (!$element->getAttribute("shared") || $this->sharedCount == 0)
 			echo '<div class="form-group elem-'.$element->getAttribute("id").'">', $this->renderLabel($element);
 
-		$colSize = 8;
+		$colSize = 'col-md-8';
 		if ($element->getAttribute ("shared")) {
-			$this->sharedCount += $element->getAttribute("shared");
+            $sharedSize = $element->getAttribute("shared");
+			$this->sharedCount += $sharedSize[strlen($sharedSize) - 1];
 			$colSize = $element->getAttribute ("shared");
         }
 
-		echo "<div class='col-md-$colSize'>";
+		echo "<div class='$colSize'>";
 		echo $element->render(), $this->renderDescriptions($element);
 		echo "</div>\n";
 
