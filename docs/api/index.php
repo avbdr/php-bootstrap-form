@@ -276,11 +276,12 @@ If on the single page multiple forms should be generated it is possible to use a
         <td>All elements support all html attributes (including data attributes and html5 validation attributes) plus following library specific attributes:</td>
     </tr>
 </table>
+<p>Library specific attributes:</p>
 <table class='table'>
     <tr>
-        <td>Attribute</td>
-        <td>Type</td>
-        <td>Description</td>
+        <th>Attribute</th>
+        <th>Type</th>
+        <th>Description</th>
     </tr>
     <tr>
         <td>append</td>
@@ -296,6 +297,16 @@ If on the single page multiple forms should be generated it is possible to use a
         <td>inline</td>
         <td>boolean</td>
         <td>Used in radio and option elements. Indicates if element values should be rendered inline or one after another</td>
+    </tr>
+    <tr>
+        <td>minlength</td>
+        <td>int</td>
+        <td>Minimal length validation</td>
+    </tr>
+    <tr>
+        <td>validation</td>
+        <td>object</td>
+        <td>Validation object. Ex: <?php echo htmlspecialchars ('"validation" => new Validation_Numeric()')?>. See <a href='#validation'>validation</a> for more info</td>
     </tr>
 </table>
 <br>
