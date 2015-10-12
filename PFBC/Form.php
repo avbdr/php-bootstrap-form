@@ -69,7 +69,10 @@ class Form extends Base {
 
 		//If the element doesn't have a specified id, a generic identifier is applied.
 		$id = $element->getAttribute("id");
-        if(empty($id))
+		$name = $element->getAttribute("name");
+        if (empty ($id) && $name)
+            $element->setAttribute("id", $name);
+        else if (empty ($id))
             $element->setAttribute("id", $this->_attributes["id"] . "-element-" . sizeof($this->_elements));
         $this->_elements[] = $element;
 
@@ -421,17 +424,7 @@ JS;
 
     public function addElements ($items) {
         foreach ($items as $id => $props) {
-            $type = $props[0];
-            if (!preg_match("/^none/i",$id)) {
-                if ($props[0]=='Select' || $props[0]=='Radio' || $props[0]=='Checkbox') {
-                    $props[4]['name'] = $id;
-                    $props[4]['id'] = $id;
-                } else {
-                    $props[3]['name'] = $id;
-                    $props[3]['id'] = $id;
-                }
-            }
-            $elementClassName = "Element_$type";
+            $elementClassName = "Element_" . $props[0];
             for ($i = 1; $i<=4;$i++)
                 if (!isset ($props[$i])) $props[$i] = null;
             $element = new $elementClassName ($props[1], $props[2], $props[3], $props[4]);
