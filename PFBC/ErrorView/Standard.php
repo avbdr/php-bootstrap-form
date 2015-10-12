@@ -9,6 +9,7 @@ class ErrorView_Standard extends ErrorView {
 		else
 			var errorFormat = errorSize + " errors were";
 
+        $('.alert-danger').hide();
 		var errorHTML = '<div class="alert alert-danger"><a class="close" data-dismiss="alert" href="#">×</a><strong class="alert-heading">The following ' + errorFormat + ' found:</strong><ul>';
 		for(e = 0; e < errorSize; ++e)
 			errorHTML += '<li>' + response.errors[e] + '</li>';
