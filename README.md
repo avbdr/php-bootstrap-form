@@ -39,4 +39,8 @@ $form->addElement(new Element_Button("Cancel", "button", array("onclick" => "his
 $form->render();
 ```
 
+Demo is available at http://smarttechdo.com/~avb/pfbc/. 
+
+Source is https://github.com/avbdr/php-bootstrap-form/blob/master/example.php
+
 See old documentation on http://www.imavex.com/pfbc3.x-php5/ . New documentation is coming.

@@ -1,5 +1,14 @@
 <?php
 session_start();
+require_once ("PFBC/Form.php");
+
+$options = Array ('1' => 'option #1', '2' => 'option #2');
+
+// default values
+$values['email'] = 'testemail@test.com';
+$values['password'] = 'testpass';
+$values['select'] = 2;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,12 +34,6 @@ session_start();
         <div class='row'>
             <div class='col-md-6'>
                 <?php
-                require_once ("PFBC/Form.php");
-                $options = Array ('1' => 'option #1', '2' => 'option #2');
-
-                $values['email'] = 'testemail@test.com';
-                $values['password'] = 'testpass';
-                $values['select'] = 2;
                 Form::open ("login", $values);
                 echo '<legend>Base</legend>';
                 Form::Hidden("id");
