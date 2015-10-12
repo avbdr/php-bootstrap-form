@@ -20,7 +20,7 @@ class View_SideBySide extends FormView {
 		if (!$element->getAttribute("shared") || $this->sharedCount == 0)
 			echo '<div class="form-group elem-'.$element->getAttribute("id").'">', $this->renderLabel($element);
 
-		$colSize = 6;
+		$colSize = 8;
 		if ($element->getAttribute ("shared")) {
 			$this->sharedCount += $element->getAttribute("shared");
 			$colSize = $element->getAttribute ("shared");

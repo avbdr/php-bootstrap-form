@@ -11,10 +11,11 @@ class Element_TinyMCE extends Element_Textarea {
 
     function renderJS() {
         echo 'tinymce.init({ mode: "exact", elements: "', $this->_attributes["id"], '", width: "100%"';
-        if(!empty($this->basic))
+/*        if(!empty($this->basic))
             echo ', theme: "simple"';
         else
             echo ', theme: "advanced", theme_advanced_resizing: true';
+*/
         echo '});';
 
         $ajax = $this->_form->getAjax();
