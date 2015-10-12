@@ -14,7 +14,7 @@ class View_SideBySide extends FormView {
 			$element->render();
             return;
 		}
-		if (!$element instanceof Element_Radio && !$element instanceof Element_File)
+		if (!$element instanceof Element_Radio && !$element instanceof Element_Checkbox && !$element instanceof Element_File)
 			$element->appendAttribute("class", "form-control");
 
 		if (!$element->getAttribute("shared") || $this->sharedCount == 0)
