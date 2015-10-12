@@ -493,6 +493,7 @@ JS;
         self::Button ("Cancel", "button", array("onclick" => "history.go(-1);"));
         echo '</div></div>';
         self::$form->view->renderFormClose();
+		self::$form->save();
     }
 
     public function __call ($type, $props) {
