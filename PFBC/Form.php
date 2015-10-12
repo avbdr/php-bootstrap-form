@@ -427,6 +427,8 @@ JS;
             for ($i = 1; $i<=4;$i++)
                 if (!isset ($props[$i])) $props[$i] = null;
             $element = new $elementClassName ($props[1], $props[2], $props[3], $props[4]);
+            if (!preg_match("/^none/i",$id))
+                $element->setAttribute ('name', $id);
             $this->AddElement($element);
         }
     }
