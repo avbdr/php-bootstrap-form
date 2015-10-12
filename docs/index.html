@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PHP-Bootstrap-Form Example</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/docs.min.css">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="bs-docs-home">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <!-- Docs master nav -->
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+                    data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">PHP-Bootstrap-Form</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li >
+                    <a href="/api/">Documentation</a>
+                </li>
+                <li>
+                    <a href="/examples.php" target="_blank">Examples</a>
+                </li>
+                <li>
+                    <a href="https://github.com/avbdr/php-bootstrap-form" target="_blank">GitHub</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+    <!-- Page content of course! -->
+    <p><main class="bs-docs-masthead" id="content" role="main">
+  <div class="container">
+    <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline">BF</span>
+    <p class="lead">A SIMPLE WAY TO BUILD FORMS</p>
+    <p class="lead">Include library and start adding form elements without thinking about markup</p>
+    <p class="lead">
+      <a href="https://github.com/avbdr/php-bootstrap-form" class="btn btn-outline-inverse btn-lg">
+        Download
+      </a>
+      <a href="/api/" class="btn btn-outline-inverse btn-lg">
+        Documentation
+      </a>
+    </p>
+    <p class="version">Current version: v3.99</p>
+  </div>
+</main></p>
+
+<div class="bs-docs-featurette">
+  <div class="container">
+    <h2 class="bs-docs-featurette-title">Designed for Twitter Bootstrap</h2>
+    <p class="lead">PHP-Bootstrap-Form has been designed to reduce development time and to require no specific knowledge from developers. It is both featherweight and feature-rich.</p>
+
+    <hr class="half-rule">
+
+    <div class="row">
+      <div class="col-md-5">
+        <h3>Features</h3>
+
+<ul>
+    <li>Created for Bootstrap 3 (Bootstrap 4 coming soon)</li>
+    <li>Responsive web design</li>
+    <li>Flexible layout</li>
+    <li>Small codebase</li>
+    <li>AJAX form submit out of the box</li>
+    <li>Form validation</li>
+    <li>Extra country list element</li>
+    <li>Extra state list element</li>
+    <li>Extra color element</li>
+    <li>tinymce and ckeditor element</li>
+    <li>See our <a href='example.php'>demo</a> for a whole list</li>
+</ul>
+      </div>
+      <div class="col-md-7">
+        <h3>Latest release</h3>
+
+<h4>v1.9.0 (2015-09-30)</h4>
+
+<ul>
+<li>[enh] Update php-bootstrap-form-cookie.js.</li>
+<li>[enh] Use options for detailView&#39;s open/close icons.</li>
+<li>[enh] Added <code>refreshOptions</code> and <code>gtHiddenColumns</code> method.</li>
+<li>[enh] Added <code>datepicker</code> option to Filter Control.</li>
+<li>[bug] Fix #936 Sort carets should not be inline-styled by JS.</li>
+<li>[bug] Fix table header width bug when setting table to no bordered.</li>
+<li>[bug] Fix #938, fix #940: Multiple Sort and Hide/Show column.</li>
+<li>[bug] Fix #970: <code>click</code>and <code>dblclick</code> bug on no-rows table.</li>
+<li>[bug] Fix #967: unselected column while column sorted display error.</li>
+<li>[enh] Support title feature in cells.</li>
+<li>[enh] Improved cookie, mobile extension.</li>
+<li>[enh] Added group-by, angular extension.</li>
+<li>[enh] Added option for setting locale.</li>
+<li>[enh] Added <code>exportDataType</code> option for export extension.</li>
+<li>[enh] Add fa-IR, ca-ES, es-ES, et-EE and af-ZA locales.</li>
+<li>[enh] Supported complex header with <code>rowspans</code> and <code>colspans</code>.</li>
+<li>[enh] Added <code>searchFomatter</code> column option.</li>
+<li>[bug] Fixed ResetRow function and undefined column search bug.</li>
+<li>[bug] Fixed #639: footer resizing problem.</li>
+<li>[enh] Added resetSearch method to reset the search text.</li>
+<li>[enh] Supported flat json.</li>
+<li>[enh] Improved reorder-columns extension.</li>
+<li>[enh] Added multiple-search, accent-neutralise extension.</li>
+<li>[enh] Added fixed-columns extension.</li>
+<li>[enh] Added <code>$.fn.bootstrapTable.utils</code> tools.</li>
+<li>[enh] Added <code>expandRow</code> and <code>collapseRow</code> methods.</li>
+<li>[enh] Updated <code>showRow</code>, <code>hideRow</code> and <code>updateCell</code> methods.</li>
+<li>[bug] Fix #1390: radio maintainSelected bug.</li>
+<li>[bug] Fix #1421: checkBy filter enabled.</li>
+<li>[bug] Remove <code>php-bootstrap-form-all.js</code> and <code>php-bootstrap-form-all.min.js</code>.</li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer
+================================================== -->
+<footer class="bs-docs-footer" role="contentinfo">
+  <div class="container">
+    <div class="bs-docs-social">
+    If you like php-bootstrap-form: 
+    <ul class="bs-docs-social-buttons">
+        <li>
+            <iframe class="github-btn"
+                    src="http://ghbtns.com/github-btn.html?user=avbdr&repo=php-bootstrap-form&type=watch&count=true"
+                    width="100" height="20" title="Star on GitHub"></iframe>
+        </li>
+        <li>
+            <iframe class="github-btn"
+                    src="http://ghbtns.com/github-btn.html?user=avbdr&repo=php-bootstrap-form&type=fork&count=true"
+                    width="102" height="20" title="Fork on GitHub"></iframe>
+        </li>
+        <li>
+            <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=avbdr&type=follow&count=true"
+                    width="175" height="20" title="Follow on GitHub"></iframe>
+        </li>
+    </ul>
+</div>
+
+
+    <p>Design were developed by <a href="https://github.com/wenzhixin" target="_blank">@wenzhixin</a>.</p>
+    <p>Maintained by <a href="https://github.com/avbdr" target="_blank">@avbdr</a> with a support of <a href='http://smarttechdo.com'>Smart Systems</a></p>
+    <p>Code licensed under <a href="https://github.com/avbdr/php-bootstrap-form/blob/master/LICENSE" target="_blank">MIT</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+    <ul class="bs-docs-footer-links muted">
+      <li>Currently v3.99</li>
+      <li>&middot;</li>
+      <li><a href="https://github.com/avbdr/php-bootstrap-form">GitHub</a></li>
+      <li>&middot;</li>
+      <li><a href="https://github.com/avbdr/php-bootstrap-form/issues">Issues</a></li>
+      <li>&middot;</li>
+      <li><a href="https://github.com/avbdr/php-bootstrap-form/releases">Releases</a></li>
+      <li>&middot;</li>
+      <li><a href="mailto:alex@smarttechdo.com">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/sidenav.js"></script>
+<script src="/assets/js/docs.min.js"></script>
+<script src="/assets/js/customize.min.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
