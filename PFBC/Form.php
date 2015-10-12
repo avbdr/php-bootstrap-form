@@ -229,7 +229,7 @@ class Form extends Base {
 			return "";
 	}
 
-	public function render($element, $returnHTML = false) {
+	public function render($element = null, $returnHTML = false) {
 		if(!empty($this->labelToPlaceholder)) {
 			foreach($this->_elements as $element) {
 				$label = $element->getLabel();
@@ -253,8 +253,10 @@ class Form extends Base {
 		if($returnHTML)
 			ob_start();
 
-		$this->renderCSS();
-		$this->renderJS();
+        if (!$element) {
+			$this->renderCSS();
+			$this->renderJS();
+        }
 		$this->view->render($element);
 
 		/*The form's instance is serialized and saved in a session variable for use during validation.*/
@@ -288,9 +290,6 @@ class Form extends Base {
 
 	protected function renderCSSFiles() {
 		$urls = array();
-		if(!in_array("bootstrap", $this->prevent))
-			$urls[] = $this->_prefix . "://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
-
 		foreach($this->_elements as $element) {
 			$elementUrls = $element->getCSSFiles();
 			if(is_array($elementUrls))
@@ -434,9 +433,7 @@ JS;
 
     public static function renderArray ($formId, $items, $values, $buttons = 1) {
         $form = new Form($formId);
-        $opts = Array (
-            "prevent" => array("bootstrap", "jQuery"),
-        );
+        $opts = Array ();
 
         if (empty ($items['ajax'])) {
             $items["ajax"] = Array ("Hidden","","",Array("value" => "false"));
@@ -466,7 +463,7 @@ JS;
     }
 
     public static function open ($formId, $values = null, $opts = null) {
-        $default = Array ("prevent" => array ("bootstrap", "jQuery"));
+        $default = Array ();
         if ($opts) foreach ($opts as $key => $val) {
             if ($key == 'ajax') {
                 $default['ajax'] = 1;
@@ -482,6 +479,8 @@ JS;
     }
 
     public static function close ($buttons = 1) {
+        self::$form->renderCSS();
+        self::$form->renderJS();
         if (!$buttons)
             return self::$form->view->renderFormClose();
         echo '<div class="row"><div class="col-md-4"></div><div class="col-md-6">';
@@ -494,7 +493,7 @@ JS;
         self::$form->view->renderFormClose();
     }
 
-    public static function __call ($type, $props) {
+    public function __call ($type, $props) {
         return self::_call ($this, $type, $props);
     }
 
