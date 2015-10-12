@@ -16,7 +16,7 @@ class Element_Checksort extends Element_Sort {
 
 		$labelClass = $this->_attributes["type"];
 		if(!empty($this->inline))
-			$labelClass .= " inline";
+			$labelClass .= "-inline";
 		
 		$count = 0;
 		$existing = "";
