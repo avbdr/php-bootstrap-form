@@ -768,7 +768,7 @@ else
     <p>Maintained by <a href="https://github.com/avbdr" target="_blank">@avbdr</a> with a support of <a href='http://smarttechdo.com'>Smart Systems</a></p>
     <p>Code licensed under <a href="https://github.com/avbdr/php-bootstrap-form/blob/master/LICENSE" target="_blank">MIT</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
     <ul class="bs-docs-footer-links muted">
-      <li>Currently v3.99</li>
+      <li>Currently v3.99.1</li>
       <li>&middot;</li>
       <li><a href="https://github.com/avbdr/php-bootstrap-form">GitHub</a></li>
       <li>&middot;</li>
