@@ -17,13 +17,13 @@ New API:
 ```php
 Form::open ("login");
 echo '<legend>Login</legend>';
-Form::Hidden("form", "login");
-Form::Email("Email Address:", "Email", array("required" => 1));
-Form::Password ("Password:", "Password", array("required" => 1));
-Form::Checkbox("", "Remember", array("1" => "Remember me"));
-Form::Button("Login");
-Form::Button("Cancel", "button", array("onclick" => "history.go(-1);"));
-Form::close();
+Form::Hidden ("id");
+Form::Email ("Email Address:", "email", array("required" => 1));
+Form::Password ("Password:", "password", array("required" => 1));
+Form::Checkbox ("", "remember", array("1" => "Remember me"));
+Form::Button ("Login");
+Form::Button ("Cancel", "button", array("onclick" => "history.go(-1);"));
+Form::close ();
 ```
 
 Old API:

@@ -41,7 +41,7 @@ $values['select'] = 2;
                 Form::Password ("Password", "password", array("required" => 1));
 
                 Form::File("File", "file");
-                Form::Textarea("Textarea", "Textarea");
+                Form::Textarea("Textarea", "textarea");
                 Form::Select("Select", "select", $options);
                 Form::HTML('<legend>HTML5</legend>');
                 Form::Phone("Phone", "phone", array ("append" => '<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>',
@@ -49,8 +49,8 @@ $values['select'] = 2;
                 Form::Search("Search", "search");
                 Form::Url("Url", "url");
                 Form::Date("Date", "date");
-                Form::DateTime("DateTime", "datetime");
-                Form::DateTimeLocal("DateTime-Local", "DateTimeLocal");
+                Form::DateTime("DateTime", "datetime", array ('shared' => 4));
+                Form::DateTimeLocal("", "DateTimeLocal", array ('shared' => 4, 'placeholder' => 'DateTime-Local'));
                 Form::Month("Month", "month");
                 Form::Week("Week", "week");
                 Form::Time("Time", "time");

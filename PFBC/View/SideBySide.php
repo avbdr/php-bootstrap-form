@@ -30,7 +30,7 @@ class View_SideBySide extends FormView {
 		echo $element->render(), $this->renderDescriptions($element);
 		echo "</div>\n";
 
-		if (!$element->getAttribute("shared") || $this->sharedCount == 6) {
+		if (!$element->getAttribute("shared") || $this->sharedCount == 8) {
 			$this->sharedCount = 0;
 			echo "</div>";
 		}
