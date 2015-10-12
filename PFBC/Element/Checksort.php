@@ -25,7 +25,7 @@ class Element_Checksort extends Element_Sort {
             $value = $this->getOptionValue($value);
             if(!empty($this->inline) && $count > 0)
                 echo ' ';
-            echo '<label class="', $labelClass, '"><input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "name", "onclick", "required")), ' value="', $this->filter($value), '"';
+            echo '<label class="', $labelClass, '"><input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "class", "value", "checked", "name", "onclick", "required")), ' value="', $this->filter($value), '"';
             if(in_array($value, $this->_attributes["value"]))
                 echo ' checked="checked"';
             echo ' onclick="updateChecksort(this, \'', str_replace(array('"', "'"), array('&quot;', "\'"), $text), '\');"/>', $text, '</label>';

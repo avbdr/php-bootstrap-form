@@ -28,7 +28,7 @@ class Element_Textbox extends Element {
 				$span = false;
 
 			if($span)
-				echo '<span class="add-on">';
+				echo '<span class="input-group-addon">';
 
 			echo $this->$type;
 
