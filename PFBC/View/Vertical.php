@@ -1,43 +1,44 @@
 <?php
 class View_Vertical extends FormView {
-	public function render() {
-		echo '<form', $this->_form->getAttributes(), '><!--csrftoken-->';
+    public function renderFormStart () {
 		$this->_form->getErrorView()->render();
+		echo '<form "', $this->_form->getAttributes(), "><!--csrftoken--><fieldset>";
+    }
+
+    public function renderElement ($element) {
+		if ($element instanceof Element_Hidden || $element instanceof Element_HTML || $element instanceof Element_Button) {
+			$element->render();
+            return;
+		}
+		if (!$element instanceof Element_Radio && !$element instanceof Element_Checkbox && !$element instanceof Element_File)
+			$element->appendAttribute("class", "form-control");
+
+        $element->setAttribute('placeholder', $element->getLabel());
+		echo $element->render(), $this->renderDescriptions($element);
+    }
+
+    public function renderFormClose () {
+	    echo '</fieldset></form>';
+    }
+
+	public function render ($onlyElement = null) {
+        $this->renderFormStart();
+        if ($onlyElement && $onlyElement == 'open')
+            return;
 
 		$elements = $this->_form->getElements();
-        $elementSize = sizeof($elements);
-        $elementCount = 0;
-        for($e = 0; $e < $elementSize; ++$e) {
-            $element = $elements[$e];
+		foreach ($elements as $element)
+            $this->renderElement ($element);
+        $this->renderFormClose();
+	}
 
-            if($element instanceof Element_Button) {
-                if($e == 0 || !$elements[($e - 1)] instanceof Element_Button)
-                    echo '<div class="form-actions">';
-				else
-					echo ' ';
-                $element->render();
-                if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof Element_Button)
-                    echo '</div>';
-            }
-            else {
-                $this->renderLabel($element);
-                $element->render();
-				$this->renderDescriptions($element);
-                ++$elementCount;
-            }
-        }
-
-		echo '</form>';
-    }
-
-	protected function renderLabel(Element $element) {
-        $label = $element->getLabel();
-		echo '<label for="', $element->getAttribute("id"), '">';
-        if(!empty($label)) {
-			if($element->isRequired())
-				echo '<span class="required">* </span>';
-			echo $label;	
-        }
-		echo '</label>'; 
-    }
-}	
+	protected function renderLabel (Element $element) {
+		$label = $element->getLabel();
+		if(empty ($label))
+            $label = '';
+		echo '<label class="col-md-4 control-label" for="', $element->getAttribute("id"), '">';
+		if ($element->isRequired())
+			echo '<span class="required">* </span>';
+		echo '</label>';
+	}
+}
