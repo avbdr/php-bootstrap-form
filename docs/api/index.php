@@ -11,9 +11,9 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/assets/sidenav.css">
-    <link rel="stylesheet" href="/assets/docs.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/sidenav.css">
+    <link rel="stylesheet" href="../assets/css/docs.min.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,8 +24,8 @@
     <![endif]-->
   </head>
   <body class="bs-docs-home">
-    <link rel="stylesheet" href="/assets/css/prism.css">
-    <script src="/assets/prism.js"></script>
+    <link rel="stylesheet" href="../assets/css/prism.css">
+    <script src="../assets/js/prism.js"></script>
     <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <!-- Docs master nav -->
@@ -47,7 +47,7 @@
                     <a href="/api/">Documentation</a>
                 </li>
                 <li>
-                    <a href="/examples.php" target="_blank">Examples</a>
+                    <a href="/example.php" target="_blank">Examples</a>
                 </li>
                 <li>
                     <a href="https://github.com/avbdr/php-bootstrap-form" target="_blank">GitHub</a>
@@ -135,7 +135,7 @@ Form::close (false);
 </div>
 <p>Following code will produce a form like this:</p>
 <?php
-require_once ("../PFBC/Form.php");
+require_once ("../../PFBC/Form.php");
 $options = Array ('1' => 'option #1', '2' => 'option #2');
 Form::open ("login");
     echo "<legend>Login</legend>";
@@ -797,8 +797,8 @@ else
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="/assets/js/sidenav.js"></script>
-<script src="/assets/docs.min.js"></script>
+<script src="../assets/js/sidenav.js"></script>
+<script src="../assets/js/docs.min.js"></script>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../ie10-viewport-bug-workaround.js"></script>
