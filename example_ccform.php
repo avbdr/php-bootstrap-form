@@ -46,16 +46,43 @@ $values['id'] = '16333';
   </head>
   <body>
     <div class='container'>
-    <legend>Please pay your dues</legend>
     <?php
-    Form::open ("payment2", $values, ['ajax' => 'finishCallback']);
+    echo "<legend>Form SideBySide (default)</legend>";
+    $form = Form::open ("paymentDefault", $values, ['ajax' => 'finishCallback']);
     Form::Hidden ("id");
     Form::Textbox ("Cardholder name", "nameOnCard", ["minlength" => 4, "required" => 1, "validation" => new Validation_AlphaNumeric()]);
     Form::Textbox ("Card number", "cardNum",  ["placeholder" => 'XXXXXXXXXXXXXXXX', "maxlength" => 18, "required" => 1, "pattern" => '\d{16,18}', "validation" => new Validation_Numeric()]);
-    Form::Select ("Expiration date", "expMonth", $months, Array('required' => 1, 'shared' => "col-md-4", "validation" => new Validation_Numeric()));
-    Form::Select ("", "expYear", $years, Array("required" => 1, "shared" => "col-md-4", "validation" => new Validation_Numeric()));
+    Form::Select ("Expiration date", "expMonth", $months, Array('required' => 1, 'shared' => "col-xs-4 col-md-4", "validation" => new Validation_Numeric()));
+    Form::Select ("", "expYear", $years, Array("required" => 1, "shared" => "col-xs-4 col-md-4", "validation" => new Validation_Numeric()));
     Form::TextBox ("CVV", "cvNum", Array("required" => 1, "maxlength" => 4, "pattern" => '\d{3,4}', "validation" => new Validation_Numeric()));
-    Form::close (Form::$SUBMIT);
+    Form::Button ("GO", 'submit', array('class' => 'btn-primary pull-right'));
+    $form->close (null);
+    echo '<hr>';
+
+    echo "<legend>Form Inline</legend>";
+    $form = Form::open ("paymentDefault", $values, ['ajax' => 'finishCallback', 'view' => 'Inline']);
+    Form::Hidden ("id");
+    Form::Textbox ("Name", "nameOnCard", ["minlength" => 4, "required" => 1, "validation" => new Validation_AlphaNumeric()]);
+    Form::Textbox ("Card Number", "cardNum",  ["placeholder" => 'XXXXXXXXXXXXXXXX', "maxlength" => 18, "required" => 1, "pattern" => '\d{16,18}', "validation" => new Validation_Numeric()]);
+    Form::Select ("ExpDate", "expMonth", $months, Array('required' => 1, "validation" => new Validation_Numeric()));
+    Form::Select ("", "expYear", $years, Array("required" => 1, "validation" => new Validation_Numeric()));
+    Form::TextBox ("CVV", "cvNum", Array("required" => 1, "maxlength" => 4, "pattern" => '\d{3,4}', "validation" => new Validation_Numeric()));
+    Form::Button ("GO", 'submit', array('class' => 'btn-primary'));
+    $form->close (null);
+    echo '<hr>';
+
+    echo "<legend>Form Vertical</legend>";
+    $form = Form::open ("paymentDefault", $values, ['ajax' => 'finishCallback', 'view' => 'Vertical']);
+    Form::Hidden ("id");
+    Form::Textbox ("Cardholder name", "nameOnCard", ["minlength" => 4, "required" => 1, "validation" => new Validation_AlphaNumeric()]);
+    Form::Textbox ("Card number", "cardNum",  ["placeholder" => 'XXXXXXXXXXXXXXXX', "maxlength" => 18, "required" => 1, "pattern" => '\d{16,18}', "validation" => new Validation_Numeric()]);
+    Form::Select ("Expiration date", "expMonth", $months, Array('required' => 1, 'shared' => "col-xs-6", "validation" => new Validation_Numeric()));
+    Form::Select ("", "expYear", $years, Array("required" => 1, "shared" => "col-xs-6 col-md-6", "validation" => new Validation_Numeric()));
+    Form::TextBox ("CVV", "cvNum", Array("required" => 1, "maxlength" => 4, "pattern" => '\d{3,4}', "validation" => new Validation_Numeric()));
+    Form::Button ("GO", 'submit', array('class' => 'btn-primary pull-right'));
+    $form->close (null);
+    echo '<hr>';
+
     ?>
     </div>
 
