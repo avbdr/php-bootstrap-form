@@ -470,6 +470,9 @@ JS;
             if ($key == 'ajax') {
                 $default['ajax'] = 1;
                 $default['ajaxCallback']= $opts['ajax'];
+            } else if ($key == 'view') {
+                $viewName = 'View_' . $val;
+                $default[$key] = new $viewName;
             } else
                 $default[$key] = $val;
         }
@@ -477,30 +480,35 @@ JS;
         self::$form->configure ($default);
         if (!empty ($values))
             self::$form->setValues ($values);
-        return self::$form->render ('open');
+        self::$form->render ('open');
+        return self::$form;
     }
 
-    public static function close ($buttons = 1) {
-        self::$form->renderCSS();
-        self::$form->renderJS();
+    public function _close ($buttons = 1) {
+        $this->renderCSS();
+        $this->renderJS();
+		$this->save();
         if (!$buttons)
-            return self::$form->view->renderFormClose();
+            return $this->view->renderFormClose();
         echo '<div class="row"><div class="col-md-4"></div><div class="col-md-6">';
-        self::Button ("Submit");
+        $this->Button ("Submit");
         if ($buttons != Form::$SUBMIT)
-            self::Button ("Remove", "button", array("class" => "btn-danger", "data-toggle" => "modal", "data-target" => "#rmConfirm"));
+            $this->Button ("Remove", "button", array("class" => "btn-danger", "data-toggle" => "modal", "data-target" => "#rmConfirm"));
 
-        self::Button ("Cancel", "button", array("onclick" => "history.go(-1);"));
+        $this->Button ("Cancel", "button", array("onclick" => "history.go(-1);"));
         echo '</div></div>';
-        self::$form->view->renderFormClose();
-		self::$form->save();
+        $this->view->renderFormClose();
     }
 
     public function __call ($type, $props) {
-        return self::_call ($this, $type, $props);
+        if ($type == 'close')
+            return $this->_close ($props[0]);
+        return $this->_call ($this, $type, $props);
     }
 
     public static function __callStatic ($type, $props) {
+        if ($type == 'close')
+            return self::$form->_close ($props[0]);
         return self::_call (self::$form, $type, $props);
     }
 
