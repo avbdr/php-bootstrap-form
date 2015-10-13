@@ -14,7 +14,7 @@ class View_SideBySide extends FormView {
 		if (!$element->getAttribute("shared") || $this->sharedCount == 0)
 			echo '<div class="form-group elem-'.$element->getAttribute("id").'"> ', $this->renderLabel($element);
 
-		$colSize = 'col-md-8';
+		$colSize = 'col-xs-12 col-md-8';
 		if ($element->getAttribute ("shared")) {
             $sharedSize = $element->getAttribute("shared");
 			$this->sharedCount += $sharedSize[strlen($sharedSize) - 1];
@@ -35,9 +35,13 @@ class View_SideBySide extends FormView {
 		$label = $element->getLabel();
 		if(empty ($label))
             $label = '';
-		echo ' <label class="col-md-4 control-label" for="', $element->getAttribute("id"), '">';
+		echo ' <label class="text-left-xs col-xs-12 col-md-4 control-label" for="', $element->getAttribute("id"), '">';
 		if ($element->isRequired())
 			echo '<span class="required">* </span>';
 		echo $label, '</label> ';
 	}
+
+    public function renderCSS () {
+        echo '@media (max-width: 1000px) { .text-left-xs { text-align: left !important; }}';
+    }
 }
