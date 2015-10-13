@@ -6,7 +6,7 @@ class View_SideBySide extends FormView {
     public function renderFormStart () {
 		$this->_form->appendAttribute("class", $this->class);
 		$this->_form->getErrorView()->render();
-		echo '<form role="form"', $this->_form->getAttributes(), "><!--csrftoken--><fieldset>";
+		echo '<form role="form"', $this->_form->getAttributes(), "><!--csrftoken--><fieldset> ";
     }
 
     public function renderElement ($element) {
@@ -18,7 +18,7 @@ class View_SideBySide extends FormView {
 			$element->appendAttribute("class", "form-control");
 
 		if (!$element->getAttribute("shared") || $this->sharedCount == 0)
-			echo '<div class="form-group elem-'.$element->getAttribute("id").'">', $this->renderLabel($element);
+			echo '<div class="form-group elem-'.$element->getAttribute("id").'"> ', $this->renderLabel($element);
 
 		$colSize = 'col-md-8';
 		if ($element->getAttribute ("shared")) {
@@ -27,18 +27,18 @@ class View_SideBySide extends FormView {
 			$colSize = $element->getAttribute ("shared");
         }
 
-		echo "<div class='$colSize'>";
+		echo " <div class='$colSize'> ";
 		echo $element->render(), $this->renderDescriptions($element);
-		echo "</div>\n";
+		echo " </div> ";
 
 		if (!$element->getAttribute("shared") || $this->sharedCount == 8) {
 			$this->sharedCount = 0;
-			echo "</div>";
+			echo " </div> ";
 		}
     }
 
     public function renderFormClose () {
-	    echo '</fieldset></form>';
+	    echo ' </fieldset></form> ';
     }
 
 	public function render ($onlyElement = null) {
@@ -56,9 +56,9 @@ class View_SideBySide extends FormView {
 		$label = $element->getLabel();
 		if(empty ($label))
             $label = '';
-		echo '<label class="col-md-4 control-label" for="', $element->getAttribute("id"), '">';
+		echo ' <label class="col-md-4 control-label" for="', $element->getAttribute("id"), '">';
 		if ($element->isRequired())
 			echo '<span class="required">* </span>';
-		echo $label, '</label>';
+		echo $label, '</label> ';
 	}
 }
