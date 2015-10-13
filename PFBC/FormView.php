@@ -1,6 +1,7 @@
 <?php
 abstract class FormView extends Base {
 	protected $_form;
+    protected $class = null;
 
 	public function __construct(array $properties = null) {
 		$this->configure($properties);
@@ -13,7 +14,24 @@ abstract class FormView extends Base {
 	/*jQuery is used to apply css entries to the last element.*/
 	public function jQueryDocumentReady() {}	
 
-	public function render($element = null) {}
+    public function render ($onlyElement = null) {
+        if ($this->class)
+            $this->_form->appendAttribute("class", $this->class);
+
+        $this->_form->getErrorView()->render();
+        echo '<form ', $this->_form->getAttributes(), "><!--csrftoken--><fieldset> ";
+        if ($onlyElement && $onlyElement == 'open')
+            return;
+
+        $elements = $this->_form->getElements();
+        foreach ($elements as $element)
+            $this->renderElement ($element);
+        $this->renderFormClose();
+    }
+
+    public function renderFormClose () {
+        echo ' </fieldset></form> ';
+    }
 
 	public function renderCSS() {
 		echo 'label span.required { color: #B94A48; }';
