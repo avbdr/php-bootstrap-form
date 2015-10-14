@@ -34,7 +34,7 @@ abstract class FormView extends Base {
     }
 
 	public function renderCSS() {
-		echo 'form-control.required:before {content:"* "; color:red;}';
+		echo 'label span.required { color: #B94A48; }';
 		echo 'span.help-inline, span.help-block { color: #888; font-size: .9em; font-style: italic; }';
 	}	
 
