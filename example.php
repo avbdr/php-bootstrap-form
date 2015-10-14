@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once ("PFBC/Form.php");
-
+$version = '';
+if (isset ($_GET['v']) && $_GET['v'] == 4)
+    $version = 4;
 $options = Array ('1' => 'option #1', '2' => 'option #2');
 
 // default values
@@ -17,11 +19,15 @@ $values['select'] = 2;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PHP-Bootstrap-Form Example</title>
-
+<?php if ($version == 4) { ?>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.min.css">
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.min.js"></script>
+<?php } else {?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<?php } ?>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,7 +41,7 @@ $values['select'] = 2;
         <div class='row'>
             <div class='col-md-6'>
                 <?php
-                Form::open ("login", $values);
+                Form::open ("login", $values, array ('view' => "SideBySide$version"));
                 echo '<legend>Base</legend>';
                 Form::Hidden("id");
                 Form::Email("Email Address", "email", array("required" => 1, "prepend" => '@'));

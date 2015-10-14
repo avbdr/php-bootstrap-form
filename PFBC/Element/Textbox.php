@@ -8,7 +8,7 @@ class Element_Textbox extends Element {
 		$addons = array();
 		if(!empty($this->prepend))
 			$addons[] = "input-group";
-		if(!empty($this->append))
+		else if (!empty($this->append))
 			$addons[] = "input-group";
 		if(!empty($addons))
 			echo '<div class="', implode(" ", $addons), '">';

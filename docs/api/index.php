@@ -190,7 +190,7 @@ If on the single page multiple forms should be generated it is possible to use a
     <tr>
         <td>view</td>
         <td>String</td>
-        <td>Form rendering type. Default is 'SideBySide'. Available types: Inline, Search, SideBySide and Vertical. See <a href='/api/#views'>Views</a> for more information</td>
+        <td>Form rendering type. Default is 'SideBySide'. Available types: Inline, Search, SideBySide, SideBySide4 and Vertical. See <a href='/api/#views'>Views</a> for more information</td>
     </tr>
     <tr>
         <td>errorView</td>
@@ -648,7 +648,8 @@ If on the single page multiple forms should be generated it is possible to use a
     Form::close(false);
 ?>
 <h1>Views</h1>
-<p>Views are responsible for converting a form's properties and elements into HTML, CSS, and javascript for the browser to display. There are 3 views available: SideBySide, Vertical and Inline.</p>
+<p>Views are responsible for converting a form's properties and elements into HTML, CSS, and javascript for the browser to display. There are 4 views available: SideBySide, SideBySide4 (boostrap4), Vertical and Inline.</p>
+<p>For bootstrap support use SideBySide4 view</p>
 <h2>SideBySide View</h2>
 <p>Default library view type. form-horizonal bootstrap form layout.</p>
 <div class="highlight">
