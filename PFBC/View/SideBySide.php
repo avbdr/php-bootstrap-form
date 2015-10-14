@@ -42,6 +42,7 @@ class View_SideBySide extends FormView {
 	}
 
     public function renderCSS () {
+        parent::renderCSS();
         echo '@media (max-width: 1000px) { .text-left-xs { text-align: left !important; }}';
     }
 }
