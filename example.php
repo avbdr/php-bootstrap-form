@@ -91,6 +91,10 @@ $values['select'] = 2;
                 echo '<legend>WYSIWYG Editor</legend>';
                 Form::TinyMCE("TinyMCE", "TinyMCE");
                 Form::CKEditor("CKEditor", "CKEditor");
+
+                Form::Button('GOGOGO', '');
+                Form::Button('GOGOGO', 'button');
+                Form::Button('GOGOGO', 'button', ['icon' => 'glyphicon glyphicon-earphone']);
                 ?>
             </div>
         </div>

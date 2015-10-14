@@ -21,7 +21,18 @@ class Element_Button extends Element {
 		
 		if(empty($properties["value"]))
 			$properties["value"] = $label;
-		
+
 		parent::__construct("", "", $properties);
 	}
+
+    public function render () {
+        $value = $this->getAttribute ("value");
+        if (!empty ($this->icon)) {
+            if ($this->icon[0] == 'f' && $this->icon[1] == 'a')
+                $value = '<i class="' . $this->icon . '"></i> ' . $value;
+            else
+                $value = '<span class="' . $this->icon . '"></span> ' . $value;
+        }
+        echo '<button', $this->getAttributes(array('value')), '/>',$value,'</button>';
+    }
 }

@@ -365,6 +365,28 @@ If on the single page multiple forms should be generated it is possible to use a
 <?php
     Form::Select("Select", "select", $options);
 ?>
+
+<h2>Buttons</h2>
+<p></p>
+<div class="highlight">
+    <pre><code class="language-php">
+    <?php echo htmlspecialchars ('<?php
+        Form::Button ("GOGOGO");
+        Form::Button ("GOGOGO", "button");
+        Form::Button ("GOGOGO", "button", ["class" => "btn-danger"]);
+        Form::Button ("GOGOGO", "button", ["icon" => "glyphicon glyphicon-earphone"]);
+        Form::Button ("GOGOGO", "button", ["icon" => "fa fa-chrome"]);
+    ?>');?>
+    </code></pre>
+</div>
+<?php
+    Form::Button ('GOGOGO');
+    Form::Button ('GOGOGO', 'button');
+    Form::Button ('GOGOGO', 'button', ['class' => 'btn-danger']);
+    Form::Button ('GOGOGO', 'button', ['icon' => 'glyphicon glyphicon-earphone']);
+?>
+
+
 <h2>Checkboxes</h2>
 <p></p>
 <div class="highlight">
