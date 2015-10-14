@@ -258,7 +258,7 @@ If on the single page multiple forms should be generated it is possible to use a
     <tr>
         <td>$label</td>
         <td>String</td>
-        <td>Element label in the form</td>
+        <td>Element label in the form. In case of the 'Vertical' view usage, element label will be rendered as a placeholder</td>
     </tr>
     <tr>
         <td>$id</td>
@@ -286,12 +286,12 @@ If on the single page multiple forms should be generated it is possible to use a
     <tr>
         <td>append</td>
         <td>String</td>
-        <td>Append addon to the beginning of an element. Ex: <?php echo htmlspecialchars ('"prepend" => "<span class=\'glyphicon glyphicon-earphone\'></span>"')?></td>
+        <td>Append addon to the end of element. Ex: <?php echo htmlspecialchars ('"prepend" => "<span class=\'glyphicon glyphicon-earphone\'></span>"')?></td>
     </tr>
     <tr>
         <td>prepend</td>
         <td>String</td>
-        <td>Prepend addon to an end of the element. Ex: <?php echo htmlspecialchars ('"prepend" => "<span class=\'glyphicon glyphicon-earphone\'></span>"')?></td>
+        <td>Prepend addon to the begining of element. Ex: <?php echo htmlspecialchars ('"prepend" => "<span class=\'glyphicon glyphicon-earphone\'></span>"')?></td>
     </tr>
     <tr>
         <td>inline</td>
@@ -301,7 +301,13 @@ If on the single page multiple forms should be generated it is possible to use a
     <tr>
         <td>minlength</td>
         <td>int</td>
-        <td>Minimal length validation</td>
+        <td>Minimal length validation. No support on client side validation, only server side for now</td>
+    </tr>
+    <tr>
+        <td>shared</td>
+        <td>String</td>
+        <td>Element row should be shared between current and next elements. Value should contain bootstrap bootstrap col- sizing definitions. Ex: 'col-xs-5 col-md-4' if you want to fit 2 elements. Note that maximum row size here is 'col-xs-10 colo-md-8'. If bigger size will be specified, your form will be misaligned. See <a href='#views'>views</a> description for more information.
+        </td>
     </tr>
     <tr>
         <td>validation</td>
@@ -642,19 +648,108 @@ If on the single page multiple forms should be generated it is possible to use a
     Form::close(false);
 ?>
 <h1>Views</h1>
-<p>Views are responsible for converting a form's properties and elements into HTML, CSS, and javascript for the browser to display. There are four views provided in the project's download: SideBySide, Vertical, Inline and Search.</p>
-<p>TODO</p>
+<p>Views are responsible for converting a form's properties and elements into HTML, CSS, and javascript for the browser to display. There are 3 views available: SideBySide, Vertical and Inline.</p>
+<h2>SideBySide View</h2>
+<p>Default library view type. form-horizonal bootstrap form layout.</p>
+<div class="highlight">
+    <pre><code class="language-php">
+    <?php echo htmlspecialchars ('<?php
+        Form::open ("test1", $values)
+        Form::Textbox ("Login", "login");
+        Form::Textbox ("Login", "password");
+        Form::Button ("GO");
+        Form::close();
+    ?>');?>
+    </code></pre>
+</div>
+<?php
+        Form::open ("testInline", $values);
+        Form::Textbox ("Login", "test");
+        Form::Textbox ("Password", "test");
+        Form::Button("GO");
+        Form::close();
+?>
+
+<h2>Inline View</h2>
+<p>form-inline bootstrap form layout.</p>
+<div class="highlight">
+    <pre><code class="language-php">
+    <?php echo htmlspecialchars ('<?php
+        Form::open ("test1", $values, "view" = "Inline")
+        Form::Textbox ("Login", "login");
+        Form::Textbox ("Login", "password");
+        Form::close();
+    ?>');?>
+    </code></pre>
+</div>
+<?php
+        Form::open ("testInline", $values, ["view" => "Inline"]);
+        Form::Textbox ("Login", "test");
+        Form::Textbox ("Password", "test");
+        Form::Button("GO");
+        Form::close();
+?>
+
+<h2>Vertical View</h2>
+<p>Simple vertical layout without labels.</p>
+<div class="highlight">
+    <pre><code class="language-php">
+    <?php echo htmlspecialchars ('<?php
+        Form::open ("test1", $values, "view" = "Vertical")
+        Form::Textbox ("Login", "login");
+        Form::Textbox ("Login", "password");
+        Form::close();
+    ?>');?>
+    </code></pre>
+</div>
+<?php
+        Form::open ("testInline", $values, ["view" => "Vertical"]);
+        Form::Textbox ("Login", "test");
+        Form::Textbox ("Password", "test");
+        Form::Button("GO");
+        Form::close();
+?>
+
 
 <h1>Ajax</h1>
-<p>PHP-Bootstrap-Form provides a very simple way for ajax form submissions. To get started, you'll first need to set the 'ajax' property in the form attributes with a name of a javascript function to called after the form's data has been submitted.</p>
+<p>PHP-Bootstrap-Form provides a very simple way for ajax form submissions. To get started, you'll first need to set the 'ajax' property in the form attributes with a name of a javascript callback function to called after the form's data has been submitted. </p>
+<p>Please note, that json reply should come with a content-type set to application/json or it will be ignored.</p>
+<p> ajax submit example:</p>
+<div class="highlight">
+    <pre><code class="language-php">
+<?php echo htmlspecialchars ('<?php
+Form::open ("test", $values, ["ajax" => "finishCallback"]);
+Form::hidden ("id");
+From::Button ("Submit");
+Form::close ();
+?>
+<script>
+function finishCallback (data) {
+    console.log (data.status);
+    console.log (data.message);
+}
+</script>');
+?>
+    </code></pre>
+</div>
+
+<p>Reply example</p>
+<div class="highlight">
+    <pre><code class="language-php">
+<?php echo htmlspecialchars ('<?php
+    $reply = ["status" => "OK", "message" => "all is good"];
+    header ("Content-type: application/json");
+    echo json_encode ($reply);
+?>');?></code></pre>
+</div>
+
 <p>See an example <a href='https://github.com/avbdr/php-bootstrap-form/blob/master/example_ccform.php'>here</a></p>
-<p>TODO</p>
 
 
 <h1>Validation</h1>
 <h2>Client-Side validation and Validation types</h2>
-<p>PHP-Bootstrap-Form validation is achieved in a two step process. The first step is to apply validation rules to form elements via the element's validation property. Some elements including Captcha, Color, Date, Email, jQueryUIDate, Month, Number, Url, and Week have validation rules applied by default.</p>
-<p>PHP-Bootstrap-Form supports 8 types of validation rules: AlphaNumeric, Captcha, Date, Email, Numeric, RegExp, Required, and Url</p>
+<p>PHP-Bootstrap-Form validation is achieved in a two step process. The first step is to apply validation rules to form elements via the element's validation attribute. Some elements including Captcha, Color, Date, Email, jQueryUIDate, Month, Number, Url, and Week have validation rules applied by default.</p>
+<p>PHP-Bootstrap-Form supports 7 types of validation rules: AlphaNumeric, Captcha, Date, Email, Numeric, RegExp, Required, and Url, </p>
 <table class='table'>
     <tr>
         <th>Type</th>
