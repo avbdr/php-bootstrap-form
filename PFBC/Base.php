@@ -40,7 +40,7 @@ abstract class Base {
     }
 
 	/*This method can be used to view a class' state.*/
-	public function debug() {
+	public function debug () {
 		echo "<pre>", print_r($this, true), "</pre>";
 	}
 
@@ -49,17 +49,19 @@ abstract class Base {
 		return htmlspecialchars($str);
 	}
 
-	public function getAttribute($attribute) {
-        $value = "";
-        if(isset($this->_attributes[$attribute]))
-            $value =  $this->_attributes[$attribute];
-
-        return $value;
+	public function getAttribute ($attribute) {
+        if(isset ($this->_attributes[$attribute]))
+            return $this->_attributes[$attribute];
+        return "";
     }
 
-	/*This method is used by the Form class and all Element classes to return a string of html
-	attributes.  There is an ignore parameter that allows special attributes from being included.*/
-	public function getAttributes($ignore = "") {
+	/**
+     * Method is used by the Form class and all Element classes to return a string of html	attributes
+     *
+     * @param $ignore Parameter allows special attributes from being included.
+     * @return string
+     */
+	public function getAttributes ($ignore = "") {
         $str = "";
 		if(!empty($this->_attributes)) {
 			if(!is_array($ignore))
@@ -74,17 +76,17 @@ abstract class Base {
         return $str;
     }
 
-	public function appendAttribute($attribute, $value) {
-        if(isset($this->_attributes)) {
-            if(!empty($this->_attributes[$attribute]))
+	public function appendAttribute ($attribute, $value) {
+        if(isset ($this->_attributes)) {
+            if(!empty ($this->_attributes[$attribute]))
                 $this->_attributes[$attribute] .= " " . $value;
             else
                 $this->_attributes[$attribute] = $value;
         }
     }
 
-    public function setAttribute($attribute, $value) {
-        if(isset($this->_attributes))
+    public function setAttribute ($attribute, $value) {
+        if(isset ($this->_attributes))
             $this->_attributes[$attribute] = $value;
     }
 }
