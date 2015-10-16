@@ -1,13 +1,11 @@
 <?php
 /*This project's namespace structure is leveraged to autoload requested classes at runtime.*/
-function PFBC_Load($class) {
-	$file = dirname(__FILE__) . "/" . str_replace("_", DIRECTORY_SEPARATOR, $class) . ".php";
-	if(is_file($file))
+function PFBC_Load ($class) {
+	$file = dirname (__FILE__) . "/" . str_replace("_", DIRECTORY_SEPARATOR, $class) . ".php";
+	if(is_file ($file))
 		include_once $file;
 }
 spl_autoload_register("PFBC_Load");
-if(in_array("__autoload", spl_autoload_functions()))
-	spl_autoload_register("__autoload");
 
 class Form extends Base {
 	public static $SUBMIT = 99;
