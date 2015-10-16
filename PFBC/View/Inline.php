@@ -1,6 +1,6 @@
 <?php
 class View_Inline extends FormView {
-	protected $class = "form-inline";
+    protected $class = "form-inline";
 
     public function renderElement ($element) {
         if ($element instanceof Element_Hidden || $element instanceof Element_HTML || $element instanceof Element_Button) {

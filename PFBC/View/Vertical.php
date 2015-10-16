@@ -2,12 +2,12 @@
 class View_Vertical extends FormView {
     private $sharedCount = 0;
     public function renderElement ($element) {
-		if ($element instanceof Element_Hidden || $element instanceof Element_HTML || $element instanceof Element_Button) {
-			$element->render();
+        if ($element instanceof Element_Hidden || $element instanceof Element_HTML || $element instanceof Element_Button) {
+            $element->render();
             return;
-		}
-		if (!$element instanceof Element_Radio && !$element instanceof Element_Checkbox && !$element instanceof Element_File)
-			$element->appendAttribute("class", "form-control");
+        }
+        if (!$element instanceof Element_Radio && !$element instanceof Element_Checkbox && !$element instanceof Element_File)
+            $element->appendAttribute("class", "form-control");
 
         if (!$element->getAttribute("shared") || $this->sharedCount == 0) {
             $rowClass = $element->getAttribute ("shared") ? 'row' : '';
@@ -22,7 +22,7 @@ class View_Vertical extends FormView {
         }
 
         $element->setAttribute('placeholder', $element->getLabel());
-		echo $element->render(), $this->renderDescriptions($element);
+        echo $element->render(), $this->renderDescriptions($element);
         if ($element->getAttribute ("shared"))
             echo " </div> ";
 
@@ -32,5 +32,5 @@ class View_Vertical extends FormView {
         }
     }
 
-	protected function renderLabel (Element $element) {}
+    protected function renderLabel (Element $element) {}
 }

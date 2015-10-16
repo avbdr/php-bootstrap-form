@@ -1,25 +1,25 @@
 <?php
 abstract class Base {
-	public function configure(array $properties = null) {
+    public function configure(array $properties = null) {
         if(!empty($properties)) {
-			$class = get_class($this);
+            $class = get_class($this);
 
-			/*The property_reference lookup array is created so that properties can be set
-			case-insensitively.*/
+            /*The property_reference lookup array is created so that properties can be set
+            case-insensitively.*/
             $available = array_keys(get_class_vars($class));
             $property_reference = array();
             foreach($available as $property)
                 $property_reference[strtolower($property)] = $property;
 
-			/*The method reference lookup array is created so that "set" methods can be called
-			case-insensitively.*/
+            /*The method reference lookup array is created so that "set" methods can be called
+            case-insensitively.*/
             $available = get_class_methods($class);
             $method_reference = array();
             foreach($available as $method)
                 $method_reference[strtolower($method)] = $method;
-			
+
             foreach($properties as $property => $value) {
-				$property = strtolower($property);
+                $property = strtolower($property);
                 /*Properties beginning with "_" cannot be set directly.*/
                 if($property[0] != "_") {
                     /*If the appropriate class has a "set" method for the property provided, then
@@ -39,44 +39,44 @@ abstract class Base {
         return $this;
     }
 
-	/*This method can be used to view a class' state.*/
-	public function debug () {
-		echo "<pre>", print_r($this, true), "</pre>";
-	}
+    /*This method can be used to view a class' state.*/
+    public function debug () {
+        echo "<pre>", print_r($this, true), "</pre>";
+    }
 
-	/*This method prevents double/single quotes in html attributes from breaking the markup.*/
-	protected function filter($str) {
-		return htmlspecialchars($str);
-	}
+    /*This method prevents double/single quotes in html attributes from breaking the markup.*/
+    protected function filter($str) {
+        return htmlspecialchars($str);
+    }
 
-	public function getAttribute ($attribute) {
+    public function getAttribute ($attribute) {
         if(isset ($this->_attributes[$attribute]))
             return $this->_attributes[$attribute];
         return "";
     }
 
-	/**
-     * Method is used by the Form class and all Element classes to return a string of html	attributes
+    /**
+     * Method is used by the Form class and all Element classes to return a string of html  attributes
      *
      * @param $ignore Parameter allows special attributes from being included.
      * @return string
      */
-	public function getAttributes ($ignore = "") {
+    public function getAttributes ($ignore = "") {
         $str = "";
-		if(!empty($this->_attributes)) {
-			if(!is_array($ignore))
-				$ignore = array($ignore);
-			$attributes = array_diff(array_keys($this->_attributes), $ignore);
-			foreach($attributes as $attribute) {
-				$str .= ' ' . $attribute;
-				if($this->_attributes[$attribute] !== "")
-					$str .= '="' . $this->filter($this->_attributes[$attribute]) . '"';
-			}	
-		}	
+        if(!empty($this->_attributes)) {
+            if(!is_array($ignore))
+                $ignore = array($ignore);
+            $attributes = array_diff(array_keys($this->_attributes), $ignore);
+            foreach($attributes as $attribute) {
+                $str .= ' ' . $attribute;
+                if($this->_attributes[$attribute] !== "")
+                    $str .= '="' . $this->filter($this->_attributes[$attribute]) . '"';
+            }
+        }
         return $str;
     }
 
-	public function appendAttribute ($attribute, $value) {
+    public function appendAttribute ($attribute, $value) {
         if(isset ($this->_attributes)) {
             if(!empty ($this->_attributes[$attribute]))
                 $this->_attributes[$attribute] .= " " . $value;
