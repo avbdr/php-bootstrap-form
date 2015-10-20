@@ -37,7 +37,9 @@ $values['select'] = 2;
   </head>
   <body>
     <div class='container'>
-        SEE ALSO: <a href='example_ccform.php'>AJAX DEMO CREDIT CARD</a>
+        <br>
+        <a href='api/'>BACK TO DOCS</a> :: <a href='example.php?v=4'>SAME FORM (BOOSTRAP 4)</a> :: <a href='example_ccform.php'>AJAX DEMO CREDIT CARD</a> :: <a href='example_ccform.php?v=4'>AJAX DEMO CREDIT CARD (BOOSTRAP 4)</a>
+        <hr>
         <div class='row'>
             <div class='col-md-6'>
                 <?php
@@ -49,6 +51,9 @@ $values['select'] = 2;
 
                 Form::File("File", "file");
                 Form::Textarea("Textarea", "textarea");
+                Form::Textbox ("Text", "text", ['class' => 'form-control-lg', 'placeholder' => 'bootstrap4 .form-control-lg']);
+                Form::Textbox ("Text", "text", ['class' => 'form-control-sm', 'placeholder' => 'boostrap4 .form-control-sm']);
+                Form::Textbox ("Text", "text");
                 Form::Select("Select", "select", $options);
                 Form::HTML('<legend>HTML5</legend>');
                 Form::Phone("Phone", "phone", array ("append" => '<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>',

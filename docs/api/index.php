@@ -367,7 +367,7 @@ If on the single page multiple forms should be generated it is possible to use a
 ?>
 
 <h2>Buttons</h2>
-<p></p>
+<p>Buttons have an extra parameter 'icon' to simplify icons markup. Currently fontawesome and glyphicon prefixes supported. Default markup for icons is span.</p>
 <div class="highlight">
     <pre><code class="language-php">
     <?php echo htmlspecialchars ('<?php

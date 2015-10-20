@@ -53,9 +53,12 @@ $values['id'] = '16333';
   </head>
   <body>
     <div class='container'>
+    <br>
+    <a href='api/'>BACK TO DOCS</a> :: <a href='example.php?v=4'>SAME FORM (BOOSTRAP 4)</a> :: <a href='example_ccform.php'>AJAX DEMO CREDIT CARD</a> :: <a href='example_ccform.php?v=4'>AJAX DEMO CREDIT CARD (BOOSTRAP 4)</a>
+    <hr>
     <?php
     echo "<legend>Form SideBySide (default)</legend>";
-    $form = Form::open ("paymentDefault", $values, ['ajax' => 'finishCallback']);
+    $form = Form::open ("paymentDefault", $values, ['ajax' => 'finishCallback', 'view' => "SideBySide$version"]);
     Form::Hidden ("id");
     Form::Textbox ("Cardholder name", "nameOnCard", ["minlength" => 4, "required" => 1, "validation" => new Validation_AlphaNumeric()]);
     Form::Textbox ("Card number", "cardNum",  ["placeholder" => 'XXXXXXXXXXXXXXXX', "maxlength" => 18, "required" => 1, "pattern" => '\d{16,18}', "validation" => new Validation_Numeric()]);

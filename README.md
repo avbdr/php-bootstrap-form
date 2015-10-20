@@ -7,17 +7,19 @@ Demo: at http://smarttechdo.com/~avb/pfbc/example.php
 
 Demo Source:  https://github.com/avbdr/php-bootstrap-form/blob/master/example.php
 
-1. Bootstrap 3 support
+Bootstrap4 Demo: at http://smarttechdo.com/~avb/pfbc/example.php?v=4
+
+Bootstrap4 Source: at http://smarttechdo.com/~avb/pfbc/example.php
+
+Features:
+
+1. Bootstrap 3 and 4 support
 2. Added new simple API. Old API is still supported
 3. Added 'shared' element property to share 1 row between multiple elements in SideBySide View
 4. View class renamed to FormView class
 5. Added Form::renderArray() helper function
 6. Fixed prepend and append properties handling
-
-Planned features:
-
-1. Create documentation :)
-2. Add a switch for bootstrap 3,4,5,etc selection
+7. Added icon property to buttons
 
 New API:
 ```php
