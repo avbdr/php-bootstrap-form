@@ -24,7 +24,7 @@ class Element_Checkbox extends OptionElement {
 			$value = $this->getOptionValue($value);
 
 			echo '<label class="', $labelClass, '">';
-            echo '<input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "class", "value", "checked", "required")), ' value="', $this->filter($value), '"';
+            echo '<input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "class", "value", "checked")), ' value="', $this->filter($value), '"';
 			if(in_array($value, $this->_attributes["value"]))
 				echo ' checked="checked"';
 			echo '/> ', $text, ' </label> ';
