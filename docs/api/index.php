@@ -96,15 +96,16 @@
     <div class="container bs-docs-container">
 
       <div class="row">
-        <div class="col-md-9"
-             role="main"
-             data-toggle="sidenav"
-             data-container="#sidenav"
-             data-hs="h1,h2"
-             data-smart-id="true"
-             data-bottom=".bs-docs-footer">
-          <h1>Installation</h1>
+        <div class="col-md-9" role="main" data-toggle="sidenav" data-container="#sidenav" data-hs="h1,h2" data-smart-id="true" data-bottom=".bs-docs-footer">
+        <h1>Installation with composer</h1>
+<p>Library could be simply downloaded from web or could be installed via composer:</p>
+<div class="highlight">
+    <pre><code class="language-php">
+        composer require avbdr/php-bootstrap-form:master
+    </code></pre>
+</div>
 
+          <h1>Initialization</h1>
 <p>To start using bootstrap-forms it should be included into your project.</p>
 <div class="highlight">
     <pre><code class="language-php">
