@@ -97,30 +97,29 @@
 
       <div class="row">
         <div class="col-md-9" role="main" data-toggle="sidenav" data-container="#sidenav" data-hs="h1,h2" data-smart-id="true" data-bottom=".bs-docs-footer">
-        <h1>Installation with composer</h1>
-<p>Library could be simply downloaded from web or could be installed via composer:</p>
+          <h1>Installation</h1>
+<p>To start using php-bootstrap-forms it should be included into your project.</p>
 <div class="highlight">
     <pre><code class="language-php">
-        composer require avbdr/php-bootstrap-form:master
+    require_once ("PFBC/Form.php");
     </code></pre>
 </div>
-
-          <h1>Initialization</h1>
-<p>To start using bootstrap-forms it should be included into your project.</p>
+<p>Or it is also possible to install library via composer:</p>
 <div class="highlight">
     <pre><code class="language-php">
-    session_start();
-    require_once ("PFBC/Form.php");
+        composer require avbdr/php-bootstrap-form:dev-master
     </code></pre>
 </div>
 
           <h1>Basic usage</h1>
+<p>Before opening a form please make sure that session is activated. Library is using sessions for server side form validation.</p>
 <p>PHP-Bootstrap-Form has support for 32 form elements: Button, Captcha, Checkbox, Checksort, CKEditor, Color, Country, Date, DateTimeLocal, DateTime, Email, File, Hidden, HTML, jQueryUIDate, Month, Number, Password, Phone, Radio, Range, Search, Select, Sort, State, Textarea, Textbox, Time, TinyMCE, Url, Week, YesNo.</p>
 <p>Each of HTML5 elements will fallback to textboxes in the event that the HTML5 input type isn't supported in the user's web browser.</p>
 <p>In the example below we will create a simple login form and then will explain how it work</p>
 <div class="highlight">
     <pre><code class="language-php">
 <?php echo htmlspecialchars ('<?php
+session_start();
 Form::open ("login");
     echo "<legend>Login</legend>";
     Form::Hidden ("id");
