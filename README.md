@@ -1,11 +1,11 @@
 ### PHP Bootstrap Form helper 4.0
-Project is fork of PFBC/PHP Form Builder Class (http://code.google.com/p/php-form-builder-class/).
+Project is fork of [PFBC/PHP Form Builder Class](http://code.google.com/p/php-form-builder-class/)
 
-[Documentation](http://smarttechdo.com/~avb/pfbc/) [Discussions](http://groups.google.com/d/forum/php-form-builder-class) [Issues](https://github.com/avbdr/php-bootstrap-form/issues)
+[Documentation](http://smarttechdo.com/~avb/pfbc/) :: [Discussions](http://groups.google.com/d/forum/php-form-builder-class) :: [Issues](https://github.com/avbdr/php-bootstrap-form/issues)
 
-[Elements Demo](http://smarttechdo.com/~avb/pfbc/example.php) [Source Code](https://github.com/avbdr/php-bootstrap-form/blob/master/example.php)
+[Elements Demo](http://smarttechdo.com/~avb/pfbc/example.php) :: [Source Code](https://github.com/avbdr/php-bootstrap-form/blob/master/example.php)
 
-[Bootstrap4 Elements Demo](http://smarttechdo.com/~avb/pfbc/example.php?v=4) [Source Code](http://smarttechdo.com/~avb/pfbc/example.php)
+[Bootstrap4 Elements Demo](http://smarttechdo.com/~avb/pfbc/example.php?v=4) :: [Source Code](http://smarttechdo.com/~avb/pfbc/example.php)
 
 Latest Features:
 
