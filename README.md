@@ -1,17 +1,13 @@
-### PHP Bootstrap Form helper
-Project is fork of PFBC/PHP Form Builder Class (http://code.google.com/p/php-form-builder-class/). The main differences of the original branch and a fork are:
+### PHP Bootstrap Form helper 4.0
+Project is fork of PFBC/PHP Form Builder Class (http://code.google.com/p/php-form-builder-class/).
 
-Documentation: http://smarttechdo.com/~avb/pfbc/
+[Documentation](http://smarttechdo.com/~avb/pfbc/) [Discussions](http://groups.google.com/d/forum/php-form-builder-class) [Issues](https://github.com/avbdr/php-bootstrap-form/issues)
 
-Demo: at http://smarttechdo.com/~avb/pfbc/example.php
+[Elements Demo](http://smarttechdo.com/~avb/pfbc/example.php) [Source Code](https://github.com/avbdr/php-bootstrap-form/blob/master/example.php)
 
-Demo Source:  https://github.com/avbdr/php-bootstrap-form/blob/master/example.php
+[Bootstrap4 Elements Demo](http://smarttechdo.com/~avb/pfbc/example.php?v=4) [Source Code](http://smarttechdo.com/~avb/pfbc/example.php)
 
-Bootstrap4 Demo: at http://smarttechdo.com/~avb/pfbc/example.php?v=4
-
-Bootstrap4 Source: at http://smarttechdo.com/~avb/pfbc/example.php
-
-Features:
+Latest Features:
 
 1. Bootstrap 3 and 4 support
 2. Added new simple API. Old API is still supported
@@ -33,18 +29,3 @@ Form::Button ("Login");
 Form::Button ("Cancel", "button", array("onclick" => "history.go(-1);"));
 Form::close ();
 ```
-
-Old API:
-```php
-$form = new Form("login");
-$form->addElement(new Element_HTML('<legend>Login</legend>'));
-$form->addElement(new Element_Hidden("form", "login"));
-$form->addElement(new Element_Email("Email Address:", "Email", array("required" => 1)));
-$form->addElement(new Element_Password("Password:", "Password", array("required" => 1)));
-$form->addElement(new Element_Checkbox("", "Remember", array("1" => "Remember me")));
-$form->addElement(new Element_Button("Login"));
-$form->addElement(new Element_Button("Cancel", "button", array("onclick" => "history.go(-1);")));
-$form->render();
-```
-
-

@@ -80,7 +80,7 @@ $values['select'] = 2;
             <div class='col-md-6'>
                 <?php
                 echo '<legend>Checkboxes</legend>';
-                Form::Checkbox ("Inline", "Remember", $options, array('inline' => 1));
+                Form::Checkbox ("CheckInline", "Remember", $options, array('inline' => 1));
                 Form::Checkbox ("Regular", "something else", $options);
 
                 echo '<legend>Radios</legend>';
