@@ -1,5 +1,4 @@
-### PHP Bootstrap Form helper 4.0
-Project is fork of [PFBC/PHP Form Builder Class](http://code.google.com/p/php-form-builder-class/)
+### PHP Bootstrap Form helper 4.0 (previously [PFBC/PHP Form Builder Class](http://code.google.com/p/php-form-builder-class/))
 
 [Documentation](http://smarttechdo.com/~avb/pfbc/) :: [Discussions](http://groups.google.com/d/forum/php-form-builder-class) :: [Issues](https://github.com/avbdr/php-bootstrap-form/issues)
 
