@@ -13,7 +13,7 @@ class Element_Date extends Element_Textbox {
     }
 
 	public function render() {
-		$this->validation[] = new Validation_RegExp("/" . $this->_attributes["pattern"] . "/", "Error: The %element% field must match the following date format: " . $this->_attributes["title"]);
+		$this->validation[] = new Validation_Date ("Error: The %element% field must match the following date format: " . $this->_attributes["title"]);
 		parent::render();
 	}
 }
