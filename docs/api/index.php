@@ -539,7 +539,7 @@ If on the single page multiple forms should be generated it is possible to use a
     Form::Time("Time", "time");
 ?>
 <h2>Calendar</h2>
-<p>jQuery UI</p>
+<p>jQuery UI based calendar element. Extra option: jQueryOptions</p>
 <div class="highlight">
     <pre><code class="language-php">
     <?php echo htmlspecialchars ('<?php
@@ -624,7 +624,7 @@ If on the single page multiple forms should be generated it is possible to use a
     Form::Captcha("Captcha");
 ?>
 <h2>Sort</h2>
-<p></p>
+<p>Extra option: jQueryOptions</p>
 <div class="highlight">
     <pre><code class="language-php">
     <?php echo htmlspecialchars ('<?php
@@ -652,7 +652,7 @@ If on the single page multiple forms should be generated it is possible to use a
     Form::Checksort("Checksort inline ", "Checksort", $options, array('inline' => 1));
 ?>
 <h2>TinyMCE Editor</h2>
-<p></p>
+<p>Extra attribute: basic</p>
 <div class="highlight">
     <pre><code class="language-php">
     <?php echo htmlspecialchars ('<?php
@@ -664,7 +664,7 @@ If on the single page multiple forms should be generated it is possible to use a
     Form::TinyMCE("TinyMCE", "TinyMCE");
 ?>
 <h2>CKEditor</h2>
-<p></p>
+<p>Extra attribute: basic</p>
 <div class="highlight">
     <pre><code class="language-php">
     <?php echo htmlspecialchars ('<?php
