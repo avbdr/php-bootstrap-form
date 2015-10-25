@@ -40,7 +40,7 @@ class Form extends Base {
     protected $ajax;
     protected $ajaxCallback;
     protected $errorView;
-    protected $labelToPlaceholder;
+    protected $noLabel = false;
     protected $resourcesPath;
     /*Prevents various automated from being automatically applied.  Current options for this array
     included jQuery, bootstrap and focus.*/
@@ -251,16 +251,6 @@ class Form extends Base {
     }
 
     public function render($element = null, $returnHTML = false) {
-        if(!empty($this->labelToPlaceholder)) {
-            foreach($this->_elements as $element) {
-                $label = $element->getLabel();
-                if(!empty($label)) {
-                    $element->setAttribute("placeholder", $label);
-                    $element->setLabel("");
-                }
-            }
-        }
-
         $this->view->_setForm($this);
         $this->errorView->_setForm($this);
 
@@ -278,6 +268,7 @@ class Form extends Base {
             $this->renderCSS();
             $this->renderJS();
         }
+        $this->view->noLabel = $this->noLabel;
         $this->view->render($element);
 
         /*The form's instance is serialized and saved in a session variable for use during validation.*/

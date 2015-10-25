@@ -197,7 +197,11 @@ If on the single page multiple forms should be generated it is possible to use a
         <td>String</td>
         <td>Error rendering view type. Default: Standart</td>
     </tr>
-
+    <tr>
+        <td>noLabel</td>
+        <td>Bool</td>
+        <td>If true, render all labels as placeholder</td>
+    </tr>
 </table>
 
 <h2>Closing a form</h2>

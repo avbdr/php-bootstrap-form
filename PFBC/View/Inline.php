@@ -10,6 +10,12 @@ class View_Inline extends FormView {
         if (!$element instanceof Element_Radio && !$element instanceof Element_Checkbox && !$element instanceof Element_File)
             $element->appendAttribute("class", "form-control");
 
+        if ($this->noLabel) {
+            $label = $element->getLabel();
+            $element->setAttribute("placeholder", $label);
+            $element->setLabel("");
+        }
+
         echo '<div class="form-group elem-'.$element->getAttribute("id").'"> ', $this->renderLabel($element);
         echo $element->render(), $this->renderDescriptions($element);
         echo "</div> ";

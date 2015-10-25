@@ -11,6 +11,12 @@ class View_SideBySide4 extends FormView {
         if (!$element instanceof Element_Radio && !$element instanceof Element_Checkbox && !$element instanceof Element_File)
             $element->appendAttribute("class", "form-control");
 
+        if ($this->noLabel) {
+            $label = $element->getLabel();
+            $element->setAttribute("placeholder", $label);
+            $element->setLabel("");
+        }
+
         if (!$element->getAttribute("shared") || $this->sharedCount == 0)
             echo '<div class="row form-group elem-'.$element->getAttribute("id").'"> ', $this->renderLabel($element);
 
@@ -32,11 +38,16 @@ class View_SideBySide4 extends FormView {
     }
 
     protected function renderLabel (Element $element) {
+        if ($this->noLabel) {
+            echo " ";
+            return;
+        }
+
         $label = $element->getLabel();
         if(empty ($label))
             $label = '';
         echo ' <label class="text-right-lg col-xs-12 col-md-4 form-control-label" for="', $element->getAttribute("id"), '">';
-        if ($element->isRequired())
+        if (!$this->noLabel && $element->isRequired())
             echo '<span class="required">* </span>';
         echo $label, '</label> ';
     }
