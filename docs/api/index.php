@@ -510,11 +510,13 @@ If on the single page multiple forms should be generated it is possible to use a
     Form::Url("Url", "url");
 ?>
 <h2>Date Elements</h2>
-<p></p>
+<p>Please note, that usage of date element can lead to a different behavoir in different browsers. </p>
 <div class="highlight">
     <pre><code class="language-php">
     <?php echo htmlspecialchars ('<?php
-        Form::Date("Date", "date", $attributes = null);
+        Form::Date("US Date", "date", $attributes = null);
+        Form::Date("EU Date", "date", array ("pattern" => "\d{2}.\d{2}.\d{4}",
+                                             "placeholder" => "DD.MM.YYYY"));
         Form::DateTime("DateTime", "datetime", $attributes = null);
         Form::DateTimeLocal("DateTime Local", "DateTimeLocal", $attributes = null);
         Form::Month("Month", "month", $attributes = null);
@@ -524,7 +526,8 @@ If on the single page multiple forms should be generated it is possible to use a
     </code></pre>
 </div>
 <?php
-    Form::Date("Date", "date");
+    Form::Date("US Date", "date");
+    Form::Date("EU Date", "date", array ("pattern" => "\d{2}.\d{2}.\d{4}", "placeholder" => "DD.MM.YYYY"));
     Form::DateTime("DateTime", "datetime");
     Form::DateTimeLocal("DateTime Local", "DateTimeLocal", array ('placeholder' => 'DateTime-Local'));
     Form::Month("Month", "month");
