@@ -4,6 +4,8 @@ class View_SideBySide extends FormView {
     private $sharedCount = 0;
 
     public function renderElement ($element) {
+        $colSize = 'col-xs-12 col-md-8';
+
         if ($element instanceof Element_Hidden || $element instanceof Element_HTML || $element instanceof Element_Button) {
             $element->render();
             return;
@@ -17,21 +19,19 @@ class View_SideBySide extends FormView {
             $element->setLabel("");
         }
 
-        if (!$element->getAttribute("shared") || $this->sharedCount == 0)
+        if ($this->sharedCount == 0)
             echo '<div class="form-group elem-'.$element->getAttribute("id").'"> ', $this->renderLabel($element);
 
-        $colSize = 'col-xs-12 col-md-8';
-        if ($element->getAttribute ("shared")) {
-            $sharedSize = $element->getAttribute("shared");
-            $this->sharedCount += $sharedSize[strlen($sharedSize) - 1];
-            $colSize = $element->getAttribute ("shared");
+        if ($element->getShared ()) {
+            $colSize = $element->getShared ();
+            $this->sharedCount += $colSize[strlen ($colSize) - 1];
         }
 
         echo " <div class='$colSize'> ";
         echo $element->render(), $this->renderDescriptions($element);
         echo " </div> ";
 
-        if (!$element->getAttribute("shared") || $this->sharedCount == 8) {
+        if ($this->sharedCount == 0 || $this->sharedCount == 8) {
             $this->sharedCount = 0;
             echo " </div> ";
         }

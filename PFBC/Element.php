@@ -7,6 +7,7 @@ abstract class Element extends Base {
     protected $label;
     protected $shortDesc;
     protected $longDesc;
+    protected $shared = false;
     protected $validation = array();
 
     public function __construct($label, $name, array $properties = null) {
@@ -47,6 +48,10 @@ abstract class Element extends Base {
 
     public function getLongDesc() {
         return $this->longDesc;
+    }
+
+    public function getShared() {
+        return $this->shared;
     }
 
     /*This method provides a shortcut for checking if an element is required.*/
