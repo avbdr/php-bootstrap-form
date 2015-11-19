@@ -519,8 +519,11 @@ JS;
     }
 
     public static function __callStatic ($type, $props) {
-        if ($type == 'close')
+        if ($type == 'close') {
+            if (!isset ($props[0]))
+                $props[0] = 1;
             return self::$form->_close ($props[0]);
+        }
         return self::_call (self::$form, $type, $props);
     }
 
