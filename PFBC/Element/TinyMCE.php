@@ -10,7 +10,9 @@ class Element_TinyMCE extends Element_Textarea {
     }
 
     function renderJS() {
-        echo 'tinymce.init({ mode: "exact", elements: "', $this->_attributes["id"], '", width: "100%"';
+        $id = $this->_form->getAttribute("id");
+        $formID = "#" . $id ." #" . $this->_attributes["id"];
+        echo 'tinymce.init({selector: "', $formID, '", width: "100%"';
 /*        if(!empty($this->basic))
             echo ', theme: "simple"';
         else
@@ -19,7 +21,6 @@ class Element_TinyMCE extends Element_Textarea {
         echo '});';
 
         $ajax = $this->_form->getAjax();
-        $id = $this->_form->getAttribute("id");
         if(!empty($ajax))
             echo 'jQuery("#$id").bind("submit", function() { tinyMCE.triggerSave(); });';
     }
