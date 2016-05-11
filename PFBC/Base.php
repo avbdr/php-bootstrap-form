@@ -24,9 +24,14 @@ abstract class Base {
                 if($property[0] != "_") {
                     /*If the appropriate class has a "set" method for the property provided, then
                     it is called instead or setting the property directly.*/
-                    if(isset($method_reference["set" . $property]))
-                        $this->$method_reference["set" . $property]($value);
-                    elseif(isset($property_reference[$property]))
+                    if(isset($method_reference["set" . $property])){
+                      if($property == 'label')
+                        $this->setlabel($value);
+                      if($property == 'required')
+                          $this->setrequired($value);
+                      if($property == 'validation')
+                          $this->setvalidation($value);
+                    } elseif(isset($property_reference[$property]))
                         $this->$property_reference[$property] = $value;
                     /*Entries that don't match an available class property are stored in the attributes
                     property if applicable.  Typically, these entries will be element attributes such as
