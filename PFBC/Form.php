@@ -20,7 +20,7 @@ THE SOFTWARE.
 Copyright (c) 2015 Smart Systems
 Copyright (c) 2009-2015 Andrew Porterfield
 
-Version: 4.0-trunk
+Version: 4.0
 */
 
 function PFBC_Load ($class) {
